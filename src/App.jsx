@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Dashboard from "./pages/Dashboard.jsx";
 
 const navLinks = [
   { label: "Cómo funciona", href: "#como-funciona" },
   { label: "Beneficios", href: "#beneficios" },
+  { label: "Dashboard", href: "#dashboard" },
   { label: "MVP", href: "#mvp" },
   { label: "Contacto", href: "#contacto" },
 ];
@@ -458,6 +460,24 @@ function Footer() {
 }
 
 export default function App() {
+  const [view, setView] = useState(() =>
+    typeof window !== "undefined" && window.location.hash === "#dashboard" ? "dashboard" : "landing",
+  );
+
+  useEffect(() => {
+    function syncView() {
+      setView(window.location.hash === "#dashboard" ? "dashboard" : "landing");
+    }
+
+    syncView();
+    window.addEventListener("hashchange", syncView);
+    return () => window.removeEventListener("hashchange", syncView);
+  }, []);
+
+  if (view === "dashboard") {
+    return <Dashboard />;
+  }
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-brand-paper text-brand-ink">
       <Navbar />
