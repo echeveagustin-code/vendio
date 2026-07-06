@@ -1,0 +1,9 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F1F2EB"/>
+  <rect x="80" y="80" width="1040" height="470" rx="8" fill="#00256F"/>
+  <circle cx="980" cy="166" r="74" fill="#816C61" fill-opacity="0.42"/>
+  <circle cx="1038" cy="456" r="118" fill="#F1F2EB" fill-opacity="0.08"/>
+  <text x="132" y="218" fill="#F1F2EB" font-family="Arial, sans-serif" font-size="58" font-weight="800">Vendio.pro</text>
+  <text x="132" y="336" fill="#F1F2EB" font-family="Arial, sans-serif" font-size="88" font-weight="800">Videos que venden</text>
+  <text x="136" y="416" fill="#F1F2EB" fill-opacity="0.72" font-family="Arial, sans-serif" font-size="34" font-weight="500">Descubrí qué contenido genera ventas y repetilo.</text>
+</svg>

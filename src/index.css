@@ -1,0 +1,83 @@
+@import url("https://api.fontshare.com/v2/css?f[]=lufga@800&f[]=plus-jakarta-sans@400,500,600,700,800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #f1f2eb;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(129, 108, 97, 0.18), transparent 26rem),
+    linear-gradient(180deg, #f1f2eb 0%, #f7f7f2 48%, #f1f2eb 100%);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+.mobile-menu-button {
+  display: inline-flex;
+}
+
+.hero-grid {
+  position: relative;
+}
+
+.hero-grid::before {
+  position: absolute;
+  inset: 2rem 1.25rem auto auto;
+  width: min(18vw, 210px);
+  aspect-ratio: 1;
+  content: "";
+  border: 1px solid rgba(0, 37, 111, 0.1);
+  border-radius: 8px;
+  transform: rotate(10deg);
+  pointer-events: none;
+}
+
+.dashboard-shell {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(241, 242, 235, 0.88)),
+    #ffffff;
+}
+
+::selection {
+  background: rgba(0, 37, 111, 0.16);
+}
+
+@media (max-width: 640px) {
+  .hero-grid::before {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-button {
+    display: none;
+  }
+}
