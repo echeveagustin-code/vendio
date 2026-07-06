@@ -475,7 +475,7 @@ export default function App() {
                 <span className="block sm:inline">que ya subís.</span>
               </h1>
               <p className="mt-6 max-w-[330px] text-lg leading-8 text-brand-ink/60 sm:max-w-2xl sm:text-xl">
-                Medí el rendimiento de tus videos, detectá los que generan ventas y repetí el contenido que mejor funciona.
+              Gestioná varias cuentas desde un solo lugar, programá contenido y usá las métricas para entender qué videos generan ventas.
               </p>
               <div className="mt-8 flex max-w-[330px] flex-col gap-3 sm:max-w-none sm:flex-row">
                 <CtaButton href="#contacto" className="w-full sm:w-auto">
