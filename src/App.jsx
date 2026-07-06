@@ -470,9 +470,9 @@ export default function App() {
                 <span className="text-xs font-extrabold uppercase tracking-[0.17em] text-brand-ink/62">Videos que venden</span>
               </div>
               <h1 className="mt-7 max-w-4xl font-display text-[2.35rem] font-extrabold leading-[1.02] tracking-normal text-brand-navy sm:text-6xl sm:leading-[0.94] lg:text-7xl">
-                <span className="block sm:inline">Vende más </span>
-                <span className="block sm:inline">sin subir </span>
-                <span className="block sm:inline">más videos.</span>
+                <span className="block sm:inline">Vendé más </span>
+                <span className="block sm:inline">con los videos </span>
+                <span className="block sm:inline">que ya subís.</span>
               </h1>
               <p className="mt-6 max-w-[330px] text-lg leading-8 text-brand-ink/60 sm:max-w-2xl sm:text-xl">
                 Medí el rendimiento de tus videos, detectá los que generan ventas y repetí el contenido que mejor funciona.
