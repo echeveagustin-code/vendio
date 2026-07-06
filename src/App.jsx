@@ -126,16 +126,12 @@ function Navbar() {
 
         <button
           type="button"
-          className="mobile-menu-button fixed right-5 top-4 h-10 w-10 items-center justify-center rounded-md border border-brand-navy/12 text-brand-navy"
-          aria-label="Abrir menu"
+          className="mobile-menu-button fixed right-5 top-4 min-h-10 items-center justify-center rounded-md border border-brand-navy/12 px-3.5 text-sm font-bold text-brand-navy"
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
         >
-          <span className="relative h-4 w-5">
-            <span className={`absolute left-0 h-0.5 w-5 bg-current transition ${open ? "top-2 rotate-45" : "top-0"}`} />
-            <span className={`absolute left-0 top-2 h-0.5 w-5 bg-current transition ${open ? "opacity-0" : "opacity-100"}`} />
-            <span className={`absolute left-0 h-0.5 w-5 bg-current transition ${open ? "top-2 -rotate-45" : "top-4"}`} />
-          </span>
+          {open ? "Cerrar" : "Menú"}
         </button>
       </nav>
 
