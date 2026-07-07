@@ -9,7 +9,7 @@ function Wordmark() {
   );
 }
 
-export default function Sidebar({ mobileOpen, onClose }) {
+export default function Sidebar({ mobileOpen, onClose, activePage = "dashboard" }) {
   return (
     <>
       {mobileOpen && (
@@ -43,9 +43,10 @@ export default function Sidebar({ mobileOpen, onClose }) {
             {sidebarMenu.map((item) => (
               <li key={item.id}>
                 <a
-                  href={item.active ? "#dashboard" : "#dashboard"}
+                  href={item.href}
+                  onClick={onClose}
                   className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition ${
-                    item.active
+                    item.id === activePage
                       ? "bg-brand-navy text-white shadow-sm"
                       : "text-brand-ink/65 hover:bg-[#f6f7fb] hover:text-brand-navy"
                   }`}

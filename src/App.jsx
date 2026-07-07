@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import Dashboard from "./pages/Dashboard.jsx";
+import CalendarPage from "./pages/CalendarPage.jsx";
 
 const navLinks = [
   { label: "Cómo funciona", href: "#como-funciona" },
   { label: "Beneficios", href: "#beneficios" },
   { label: "Dashboard", href: "#dashboard" },
+  { label: "Calendario", href: "#calendario" },
   { label: "MVP", href: "#mvp" },
   { label: "Contacto", href: "#contacto" },
 ];
@@ -459,14 +461,19 @@ function Footer() {
   );
 }
 
+function getViewFromHash() {
+  const hash = window.location.hash;
+  if (hash === "#dashboard") return "dashboard";
+  if (hash === "#calendario") return "calendario";
+  return "landing";
+}
+
 export default function App() {
-  const [view, setView] = useState(() =>
-    typeof window !== "undefined" && window.location.hash === "#dashboard" ? "dashboard" : "landing",
-  );
+  const [view, setView] = useState(getViewFromHash);
 
   useEffect(() => {
     function syncView() {
-      setView(window.location.hash === "#dashboard" ? "dashboard" : "landing");
+      setView(getViewFromHash());
     }
 
     syncView();
@@ -476,6 +483,10 @@ export default function App() {
 
   if (view === "dashboard") {
     return <Dashboard />;
+  }
+
+  if (view === "calendario") {
+    return <CalendarPage />;
   }
 
   return (

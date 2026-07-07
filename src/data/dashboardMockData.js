@@ -1,18 +1,16 @@
 export const sidebarMenu = [
-  { id: "dashboard", label: "Dashboard", icon: "📊", active: true },
-  { id: "calendario", label: "Calendario", icon: "📅" },
-  { id: "contenido", label: "Contenido", icon: "🎬" },
-  { id: "cuentas", label: "Cuentas conectadas", icon: "🔗" },
-  { id: "analiticas", label: "Analíticas", icon: "📈" },
-  { id: "recomendaciones", label: "Recomendaciones", icon: "💡" },
-  { id: "configuracion", label: "Configuración", icon: "⚙️" },
+  { id: "dashboard", label: "Dashboard", icon: "📊", href: "#dashboard" },
+  { id: "calendario", label: "Calendario", icon: "📅", href: "#calendario" },
+  { id: "contenido", label: "Contenido", icon: "🎬", href: "#dashboard" },
+  { id: "cuentas", label: "Cuentas conectadas", icon: "🔗", href: "#dashboard" },
+  { id: "analiticas", label: "Analíticas", icon: "📈", href: "#dashboard" },
+  { id: "recomendaciones", label: "Recomendaciones", icon: "💡", href: "#dashboard" },
+  { id: "configuracion", label: "Configuración", icon: "⚙️", href: "#dashboard" },
 ];
 
 export const kpis = [
-  { id: "videos", icon: "🎥", label: "Videos analizados", value: "47", change: "+12%", positive: true },
-  { id: "ventas", icon: "💰", label: "Ventas atribuidas", value: "284", change: "+8%", positive: true },
-  { id: "score", icon: "⭐", label: "Score promedio", value: "76", change: "+5%", positive: true },
-  { id: "ganador", icon: "🏆", label: "Contenido ganador", value: "12", change: "+3", positive: true },
+  { id: "videos", icon: "🎥", label: "Videos publicados", value: "47", change: "+12%", positive: true },
+  { id: "ventas", icon: "💰", label: "Visitas atribuidas", value: "284", change: "+8%", positive: true },
   { id: "programadas", icon: "📆", label: "Publicaciones programadas", value: "18", change: "esta semana", positive: null },
   { id: "cuentas", icon: "👥", label: "Cuentas conectadas", value: "6", change: "activas", positive: null },
 ];
@@ -26,15 +24,9 @@ export const todaySummary = [
 export const connectedAccounts = [
   { platform: "Instagram", handle: "@tienda.style", status: "Activa", statusTone: "success" },
   { platform: "TikTok", handle: "@tienda.style", status: "Activa", statusTone: "success" },
-  { platform: "Facebook", handle: "Tienda Style", status: "Pendiente", statusTone: "warning" },
-  { platform: "Instagram", handle: "@outlet.style", status: "Activa", statusTone: "success" },
+  { platform: "Instagram", handle: "@outlet.style", status: "Pendiente", statusTone: "warning" },
 ];
 
-export const upcomingTasks = [
-  { id: 1, text: "Revisar videos con bajo CTA", done: false },
-  { id: 2, text: "Repetir contenido ganador", done: false },
-  { id: 3, text: "Programar reels del viernes", done: false },
-];
 
 export const featuredContent = [
   {
@@ -87,37 +79,18 @@ export const featuredContent = [
   },
 ];
 
-export const recommendations = [
-  {
-    id: 1,
-    icon: "🔁",
-    text: "Repetí el formato de tutoriales: generó 3.4x más consultas.",
-    tone: "info",
-  },
-  {
-    id: 2,
-    icon: "⚡",
-    text: "Los videos con CTA en los primeros 5 segundos convierten mejor.",
-    tone: "tip",
-  },
-  {
-    id: 3,
-    icon: "📢",
-    text: "Tenés 2 cuentas sin publicaciones programadas esta semana.",
-    tone: "alert",
-  },
-];
+
 
 const DAY_LABELS = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
 const CALENDAR_SCHEDULE = [
   { posts: 2, reel: 1, label: "2 posts" },
-  { posts: 1, label: "1 reel" },
+  { posts: 1, label: "1 post" },
   { label: "Libre" },
   { posts: 3, label: "3 posts" },
-  { posts: 1, reel: 1, label: "1 post" },
+  { posts: 1, reel: 1, label: "2 posts" },
   { label: "Libre" },
-  { posts: 2, label: "2 reels" },
+  { posts: 2, reel: 1, label: "2 posts" },
   { posts: 1, label: "1 post" },
   { posts: 2, reel: 1, label: "2 posts" },
   { label: "Libre" },

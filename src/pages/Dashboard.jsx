@@ -5,9 +5,7 @@ import CalendarStrip from "../components/dashboard/CalendarStrip";
 import KpiCard from "../components/dashboard/KpiCard";
 import TodaySummary from "../components/dashboard/TodaySummary";
 import ConnectedAccounts from "../components/dashboard/ConnectedAccounts";
-import UpcomingTasks from "../components/dashboard/UpcomingTasks";
 import ContentCard from "../components/dashboard/ContentCard";
-import Recommendations from "../components/dashboard/Recommendations";
 import { kpis, featuredContent } from "../data/dashboardMockData";
 
 export default function Dashboard() {
@@ -15,7 +13,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-[#f6f7fb] text-brand-ink">
-      <Sidebar mobileOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Sidebar mobileOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} activePage="dashboard" />
 
       <div className="lg:pl-[260px]">
         <main className="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
@@ -23,17 +21,23 @@ export default function Dashboard() {
 
           <CalendarStrip />
 
-          <section className="mb-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-6" aria-label="Indicadores principales">
-            {kpis.map((kpi) => (
-              <KpiCard key={kpi.id} {...kpi} />
-            ))}
+          <section className="mb-6" aria-label="Indicadores principales">
+            <div className="mb-4">
+              <h2 className="font-display text-xl font-extrabold text-brand-navy">Tus estadísticas</h2>
+              <p className="mt-1 text-sm text-brand-ink/55">En estos 30 días</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-6">
+              {kpis.map((kpi) => (
+                <KpiCard key={kpi.id} {...kpi} />
+              ))}
+            </div>
           </section>
 
           <div className="grid gap-6 xl:grid-cols-[minmax(280px,320px)_1fr]">
             <aside className="space-y-5">
               <TodaySummary />
               <ConnectedAccounts />
-              <UpcomingTasks />
             </aside>
 
             <div className="space-y-6">
@@ -55,7 +59,7 @@ export default function Dashboard() {
                 </div>
               </section>
 
-              <Recommendations />
+
             </div>
           </div>
 
