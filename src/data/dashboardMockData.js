@@ -9,7 +9,7 @@ export const sidebarMenu = [
 ];
 
 export const kpis = [
-  { id: "videos", icon: "🎥", label: "Videos publicados", value: "47", change: "+12%", positive: true },
+  { id: "publicaciones", icon: "📝", label: "Publicaciones realizadas", value: "47", change: "+12%", positive: true },
   { id: "ventas", icon: "💰", label: "Visitas atribuidas", value: "284", change: "+8%", positive: true },
   { id: "programadas", icon: "📆", label: "Publicaciones programadas", value: "18", change: "esta semana", positive: null },
   { id: "cuentas", icon: "👥", label: "Cuentas conectadas", value: "6", change: "activas", positive: null },

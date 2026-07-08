@@ -1,18 +1,15 @@
 export default function CalendarToolbar({
   platform,
-  status,
   monthLabel,
   onPlatformChange,
-  onStatusChange,
   onToday,
   onPrevMonth,
   onNextMonth,
 }) {
   const platforms = ["Todas", "Instagram", "TikTok", "Facebook", "YouTube"];
-  const statuses = ["Todos", "Programado", "Borrador", "Publicado", "Revisión"];
 
   return (
-    <div className="mb-4 space-y-3">
+    <div className="mb-4">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-bold uppercase tracking-[0.1em] text-brand-ink/40">Plataforma</span>
@@ -60,24 +57,6 @@ export default function CalendarToolbar({
             Hoy
           </button>
         </div>
-      </div>
-
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-bold uppercase tracking-[0.1em] text-brand-ink/40">Estado</span>
-        {statuses.map((s) => (
-          <button
-            key={s}
-            type="button"
-            onClick={() => onStatusChange(s)}
-            className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
-              status === s
-                ? "bg-[#0f3b8f] text-white shadow-sm"
-                : "border border-brand-navy/10 bg-white text-brand-ink/60 hover:border-brand-navy/20"
-            }`}
-          >
-            {s}
-          </button>
-        ))}
       </div>
     </div>
   );

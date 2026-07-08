@@ -6,7 +6,7 @@ export const calendarKpis = [
   { id: "posts", icon: "📆", label: "Publicaciones este mes", value: "42", change: "+6", positive: true },
   { id: "drafts", icon: "✏️", label: "Borradores", value: "9", change: "pendientes", positive: null },
   { id: "notes", icon: "📝", label: "Notas activas", value: "14", change: "en curso", positive: null },
-  { id: "empty", icon: "📭", label: "Días sin contenido", value: "6", change: "este mes", positive: null },
+  { id: "views", icon: "👁️", label: "Visualizaciones totales", value: "884K", change: "+8%", positive: true },
 ];
 
 export const weekDayLabels = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
@@ -129,10 +129,9 @@ export function buildCalendarGrid(year, month) {
   return cells;
 }
 
-export function filterPosts(posts, { platform, status }) {
+export function filterPosts(posts, { platform }) {
   return posts.filter((post) => {
     if (platform !== "Todas" && post.platform !== platform) return false;
-    if (status !== "Todos" && post.status !== status) return false;
     return true;
   });
 }
