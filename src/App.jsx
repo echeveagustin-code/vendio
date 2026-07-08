@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { FaTiktok, FaInstagram, FaFacebook } from "react-icons/fa";
 import Dashboard from "./pages/Dashboard.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx";
 import AccountsPage from "./pages/AccountsPage.jsx";
@@ -143,6 +144,12 @@ const videoRows = [
 ];
 
 function Wordmark({ light = false }) {
+  const socialLinks = [
+    { name: "Instagram", containerClass: "bg-transparent", icon: <FaInstagram size={20} /> },
+    { name: "TikTok", containerClass: "bg-transparent", icon: <FaTiktok size={20} /> },
+    { name: "Facebook", containerClass: "bg-transparent", icon: <FaFacebook size={20} /> },
+  ];
+
   return (
     <a href="#inicio" className="font-sora text-[1.45rem] font-extrabold tracking-normal">
       <span className={light ? "text-brand-paper" : "text-brand-navy"}>Ven</span>
@@ -548,6 +555,11 @@ export default function App() {
   if (view === "cuentas") {
     return <AccountsPage />;
   }
+  const socialLinks = [
+    { name: "Instagram", containerClass: "bg-transparent", icon: <FaInstagram size={22} /> },
+    { name: "TikTok", containerClass: "bg-transparent", icon: <FaTiktok size={22} /> },
+    { name: "Facebook", containerClass: "bg-transparent", icon: <FaFacebook size={22} /> },
+  ];
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-brand-paper text-brand-ink">
@@ -584,11 +596,19 @@ export default function App() {
                 Sumate gratis a la lista de espera. Te avisamos cuando abramos los primeros accesos.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
-                <div className="flex -space-x-3" aria-hidden="true">
-                  {["bg-[#1D1D1F]", "bg-[#000000]", "bg-[#525252]", "bg-white"].map((color, index) => (
-                    <span key={color} className={`h-10 w-10 rounded-full border-2 border-brand-paper ${color}`}>
-                      {index === 3 && <span className="flex h-full items-center justify-center text-xs font-extrabold text-brand-navy">+</span>}
-                    </span>
+                <div className="flex" aria-hidden>
+                  {socialLinks.map(({ name, svg, icon, containerClass = "bg-white" }) => (
+                    <div
+                      key={name}
+                      role="img"
+                      aria-label={name}
+                      title={name}
+                      className={`h-12 w-12 rounded-full border-2 border-brand-paper ${containerClass} flex items-center justify-center text-brand-navy`}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <span className="sr-only">{name}</span>
+                      {icon || svg}
+                    </div>
                   ))}
                 </div>
                 <p className="max-w-xs text-sm font-semibold leading-6 text-brand-ink/58">
