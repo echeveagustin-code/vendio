@@ -33,11 +33,10 @@ export default function AccountDetailPanel({ account, onReconnect }) {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-3">
+      <div className="mt-4 hidden gap-3 sm:grid sm:grid-cols-2">
         <DetailStat label="Seguidores" value={account.followers} />
         <DetailStat label="Videos" value={account.posts} />
         <DetailStat label="Alcance 30d" value={account.reach} />
-        <DetailStat label="Ventas" value={account.sales} />
       </div>
 
       <div className="mt-5 rounded-2xl border border-brand-navy/8 p-4">

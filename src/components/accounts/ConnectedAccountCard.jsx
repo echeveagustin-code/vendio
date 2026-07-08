@@ -2,9 +2,9 @@ import AccountStatusBadge from "./AccountStatusBadge";
 
 function Stat({ label, value }) {
   return (
-    <div>
-      <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-brand-ink/38">{label}</p>
-      <p className="mt-1 font-extrabold text-brand-ink">{value}</p>
+    <div className="min-w-0">
+      <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-brand-ink/38 truncate">{label}</p>
+      <p className="mt-1 font-extrabold text-brand-ink truncate">{value}</p>
     </div>
   );
 }
@@ -28,11 +28,10 @@ export default function ConnectedAccountCard({ account, selected, onSelect, onRe
           </span>
         </button>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
           <Stat label="Seguidores" value={account.followers} />
-          <Stat label="Videos" value={account.posts} />
-          <Stat label="Alcance 30d" value={account.reach} />
-          <Stat label="Ventas" value={account.sales} />
+          <Stat label="Publicaciones" value={account.posts} />
+          <Stat label="Alcance " value={account.reach} />
           <Stat label="Sync" value={account.lastSync} />
         </div>
 
@@ -45,22 +44,6 @@ export default function ConnectedAccountCard({ account, selected, onSelect, onRe
           </span>
           <button type="button" onClick={() => onSelect(account)} className="rounded-xl border border-brand-navy/10 px-3 py-2 text-xs font-bold text-brand-navy">
             Ver detalles
-          </button>
-          <button
-            type="button"
-            onClick={() => onReconnect(account)}
-            className={`rounded-xl px-3 py-2 text-xs font-bold ${needsReconnect ? "bg-brand-navy text-white" : "border border-brand-navy/10 text-brand-navy"}`}
-          >
-            Reconectar
-          </button>
-          <button type="button" className="rounded-xl border border-brand-navy/10 px-3 py-2 text-xs font-bold text-brand-navy">
-            Sincronizar
-          </button>
-          <button type="button" className="rounded-xl border border-brand-navy/10 px-3 py-2 text-xs font-bold text-brand-ink/60">
-            Desactivar
-          </button>
-          <button type="button" className="rounded-xl border border-rose-100 px-3 py-2 text-xs font-bold text-rose-700">
-            Eliminar
           </button>
         </div>
       </div>
