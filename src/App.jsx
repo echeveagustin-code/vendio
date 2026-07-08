@@ -1,52 +1,111 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Dashboard from "./pages/Dashboard.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx";
 import AccountsPage from "./pages/AccountsPage.jsx";
 
 const navLinks = [
   { label: "Cómo funciona", href: "#como-funciona" },
-  { label: "Beneficios", href: "#beneficios" },
-  { label: "Dashboard", href: "#dashboard" },
-  { label: "Calendario", href: "#calendario" },
-  { label: "MVP", href: "#mvp" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Acceso Anticipado", href: "#acceso-anticipado" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 const problemCards = [
   {
-    title: "Muchos videos, pocos datos",
-    text: "Publicás Reels, TikToks y Shorts, pero no queda claro cuáles empujan consultas, clics o ventas.",
+    title: "No sabés qué video trajo consultas",
+    text: "Los comentarios, mensajes y pedidos quedan repartidos entre redes, cuentas y publicaciones.",
   },
   {
-    title: "Métricas confusas",
-    text: "Views, likes y alcance ayudan, pero no siempre muestran qué pieza mueve el negocio.",
+    title: "No queda claro qué generó ventas",
+    text: "Views y likes ayudan, pero no siempre muestran qué contenido movió el negocio.",
   },
   {
-    title: "No sabés qué contenido repetir",
-    text: "El contenido ganador se pierde entre publicaciones y terminás creando desde cero cada semana.",
+    title: "Manejás varias cuentas a mano",
+    text: "Instagram, TikTok, Facebook y otras redes terminan en una rutina difícil de ordenar.",
+  },
+  {
+    title: "El contenido ganador se pierde",
+    text: "Publicás, seguís con lo próximo y dejás de repetir formatos que ya demostraron potencial.",
+  },
+  {
+    title: "No hay calendario de ventas",
+    text: "El contenido se sube por urgencia, sin una vista clara de campañas, fechas y objetivos.",
+  },
+  {
+    title: "Publicás más, pero no mejor",
+    text: "Vendio busca cambiar el foco: menos intuición, más señales simples para decidir.",
   },
 ];
 
 const benefits = [
-  "Medí ventas por video",
-  "Detectá contenido ganador",
-  "Repetí lo que funciona",
-  "Organizá tu biblioteca de videos",
-  "Tomá decisiones con datos",
+  {
+    title: "Conectá varias cuentas",
+    text: "Reuní tus redes y marcas en un tablero pensado para negocios que venden por contenido.",
+  },
+  {
+    title: "Planificá publicaciones",
+    text: "Armá campañas, ideas y fechas sin depender de notas sueltas o recordatorios dispersos.",
+  },
+  {
+    title: "Programá contenido",
+    text: "Prepará la semana de contenido con una vista clara de productos, formatos y objetivos.",
+  },
+  {
+    title: "Analizá métricas útiles",
+    text: "Mirá consultas, interacción, clics y señales de venta sin perderte en reportes complejos.",
+  },
+  {
+    title: "Detectá contenido ganador",
+    text: "Encontrá qué videos, publicaciones o formatos tienen más chances de traer clientes.",
+  },
+  {
+    title: "Repetí formatos que venden",
+    text: "Convertí lo que funcionó en una próxima acción, sin empezar cada semana desde cero.",
+  },
 ];
 
 const steps = [
   {
-    title: "Subí o conectá tus videos",
-    text: "Agrupá tus videos cortos y asocialos a campañas, productos o lanzamientos.",
+    title: "Conectás tus redes",
+    text: "Sumás tus cuentas de Instagram, TikTok, Facebook u otras redes para ordenarlas en Vendio.",
   },
   {
-    title: "Analizá el rendimiento",
-    text: "Mirá views, clics, consultas y ventas en un tablero pensado para acción.",
+    title: "Planificás y subís contenido",
+    text: "Armás tu calendario, preparás publicaciones y organizás ideas por campaña, producto o marca.",
   },
   {
-    title: "Repetí lo que vende",
-    text: "Convertí tus mejores piezas en ideas reutilizables para vender más con el mismo material.",
+    title: "Vendio muestra qué funciona",
+    text: "Ves qué publicaciones generan más consultas, interacción y ventas para repetir lo que rinde.",
+  },
+];
+
+const faqItems = [
+  {
+    question: "¿Vendio publica automáticamente?",
+    answer:
+      "La idea es que puedas planificar y programar contenido desde Vendio. Algunas funciones dependerán de las integraciones disponibles durante la beta.",
+  },
+  {
+    question: "¿Puedo conectar varias cuentas?",
+    answer: "Sí. Vendio está pensado para personas y negocios que manejan más de una cuenta, marca o canal social.",
+  },
+  {
+    question: "¿Sirve para Instagram y TikTok?",
+    answer:
+      "Ese es el foco inicial: redes donde el contenido corto impulsa consultas, interacción y ventas. También evaluamos otras integraciones según la demanda.",
+  },
+  {
+    question: "¿Está pensado para agencias?",
+    answer:
+      "No principalmente. Vendio prioriza emprendedores, tiendas, creadores y negocios que venden por redes y necesitan algo simple, no un sistema pesado de agencia.",
+  },
+  {
+    question: "¿Cuándo va a estar disponible?",
+    answer:
+      "Estamos preparando los primeros accesos. Si te sumás a la lista, te avisamos cuando abramos cupos para probar la beta.",
+  },
+  {
+    question: "¿Tengo que pagar para sumarme a la lista?",
+    answer: "No. Sumarte a la lista de espera es gratis y no implica ningún compromiso de compra.",
   },
 ];
 
@@ -85,9 +144,9 @@ const videoRows = [
 
 function Wordmark({ light = false }) {
   return (
-    <a href="#inicio" className="font-display text-[1.45rem] font-extrabold tracking-normal">
+    <a href="#inicio" className="font-sora text-[1.45rem] font-extrabold tracking-normal">
       <span className={light ? "text-brand-paper" : "text-brand-navy"}>Ven</span>
-      <span className={light ? "text-white/72" : "text-brand-accent"}>dio.pro</span>
+      <span className={light ? "text-white/72" : "text-[#FFF7E6]"}>dio.pro</span>
     </a>
   );
 }
@@ -115,20 +174,21 @@ function Navbar() {
       <nav className="relative mx-auto flex w-screen min-w-0 max-w-none items-center justify-between px-5 py-4 md:w-full md:max-w-7xl lg:px-8" aria-label="Principal">
         <Wordmark />
 
-        <div className="hidden items-center gap-7 md:flex">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="text-sm font-semibold text-brand-ink/70 transition hover:text-brand-navy">
-              {link.label}
-            </a>
-          ))}
-        </div>
+        <div className="flex items-center gap-4">
+          <div className="hidden items-center gap-7 md:flex">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="text-sm font-semibold text-brand-ink/70 transition hover:text-brand-navy">
+                {link.label}
+              </a>
+            ))}
+          </div>
 
-        <div className="hidden md:block">
-          <CtaButton href="#contacto" className="min-h-10 px-4 py-2">
-            Sumarme al MVP
-          </CtaButton>
+          <div className="hidden md:block">
+            <CtaButton href="#acceso-anticipado" className="min-h-10 px-4 py-2">
+              Quiero acceso anticipado
+            </CtaButton>
+          </div>
         </div>
-
         <button
           type="button"
           className="mobile-menu-button fixed right-5 top-4 min-h-10 items-center justify-center rounded-md border border-brand-navy/12 px-3.5 text-sm font-bold text-brand-navy"
@@ -153,8 +213,8 @@ function Navbar() {
                 {link.label}
               </a>
             ))}
-            <CtaButton href="#contacto" className="mt-2 w-full" onClick={() => setOpen(false)}>
-              Sumarme al MVP
+            <CtaButton href="#acceso-anticipado" className="mt-2 w-full" onClick={() => setOpen(false)}>
+              Quiero acceso anticipado
             </CtaButton>
           </div>
         </div>
@@ -251,14 +311,16 @@ function ProblemSection() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeader
           light
-          eyebrow="Problema"
-          title="Dejá de publicar a ciegas"
-          text="Vendio.pro ordena la relación entre contenido y ventas para que cada video deje una pista útil."
+          eyebrow="Te pasa que..."
+          title="¿Publicás todos los días pero no sabés cuales venden?"
+          text="Vendio.pro te muestra qué contenido funciona, qué publicaciones generan consultas y qué formatos conviene repetir."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {problemCards.map((card) => (
-            <article key={card.title} className="rounded-lg border border-white/10 bg-white/[0.06] p-6 shadow-accent">
-              <div className="mb-6 h-10 w-10 rounded-md bg-brand-accent/90" aria-hidden="true" />
+          {problemCards.map((card, index) => (
+            <article key={card.title} className="rounded-lg border border-white/10 bg-[rgba(255,255,255,0.04)] p-6 shadow-accent backdrop-blur-2xl">
+              <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-md text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(0,0,0,0.10)] backdrop-blur-xl">
+                {String(index + 1).padStart(2, "0")}
+              </div>
               <h3 className="font-display text-xl font-extrabold">{card.title}</h3>
               <p className="mt-3 leading-7 text-white/66">{card.text}</p>
             </article>
@@ -274,18 +336,20 @@ function BenefitsSection() {
     <section id="beneficios" className="py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeader
-          eyebrow="Solución"
-          title="Todo lo que necesitás para repetir contenido ganador"
-          text="Un tablero simple para entender qué videos atraen compradores y qué hacer después."
+          eyebrow="... DEJÁ DE ADIVINAR"
+          title="Encontrá tus mejores publicaciones y usalas de nuevo!"
+          text="Vendio.pro te ayuda a detectar qué contenido genera ventas, qué publicaciones atraen consultas y qué formatos conviene repetir."
         />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit, index) => (
-            <article key={benefit} className="group rounded-lg border border-brand-navy/8 bg-white p-5 shadow-soft transition duration-200 hover:-translate-y-1 hover:shadow-lift">
-              <span className="text-sm font-extrabold text-brand-accent">0{index + 1}</span>
-              <h3 className="mt-5 min-h-14 font-display text-lg font-extrabold leading-tight text-brand-navy">{benefit}</h3>
-              <p className="mt-3 text-sm leading-6 text-brand-ink/56">
-                Mirá la señal correcta y convertí cada aprendizaje en una próxima acción.
-              </p>
+            <article key={benefit.title} className="group rounded-3xl border border-brand-navy/8 bg-white p-6 shadow-soft transition duration-200 hover:-translate-y-1 hover:shadow-lift">
+              <div className="mb-4 inline-flex h-8 min-w-[42px] items-center justify-center rounded-full bg-[#F5E9D5] px-3 text-sm font-extrabold uppercase tracking-[0.2em] text-[#6B5A4A]">
+                0{index + 1}
+              </div>
+              <h3 className="font-display text-lg font-extrabold leading-tight text-brand-navy">
+                {benefit.title}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-brand-ink/70">{benefit.text}</p>
             </article>
           ))}
         </div>
@@ -298,7 +362,7 @@ function HowItWorksSection() {
   return (
     <section id="como-funciona" className="border-y border-brand-navy/8 bg-white/42 py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        <SectionHeader eyebrow="Cómo funciona" title="Tres pasos para vender más con tus videos" />
+        <SectionHeader eyebrow="Cómo funciona" title="Tres pasos para vender mejor con tu contenido" />
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {steps.map((step, index) => (
             <article key={step.title} className="relative overflow-hidden rounded-lg border border-brand-navy/8 bg-brand-paper p-7 shadow-soft">
@@ -318,35 +382,47 @@ function HowItWorksSection() {
 
 function MvpSection() {
   return (
-    <section id="mvp" className="py-20 sm:py-24">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
-        <div>
-          <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-accent">MVP privado</p>
-          <h2 className="mt-3 font-display text-3xl font-extrabold tracking-normal text-brand-navy sm:text-4xl">
-            Estamos lanzando la primera versión para negocios que venden con videos cortos.
-          </h2>
-          <p className="mt-5 text-lg leading-8 text-brand-ink/60">
-            Buscamos ecommerce, marcas personales, tiendas y emprendedores que ya publican en Instagram, TikTok,
-            Reels o Shorts y quieren entender qué contenido convierte.
-          </p>
-          <CtaButton href="#contacto" className="mt-8">
-            Quiero acceso temprano
-          </CtaButton>
-        </div>
+    <section id="mvp" className="bg-brand-navy py-20 text-white sm:py-24">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-center">
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-white/70">Acceso anticipado</p>
+            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-normal text-white sm:text-4xl">
+              Estamos preparando Vendio. Sumate a la beta.
+            </h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-white/75">
+              Te avisamos cuando abramos los primeros accesos. Queremos construir Vendio con negocios que ya venden por redes y necesitan una forma más simple de organizarse.
+            </p>
+            <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+              <h3 className="font-display text-xl font-bold text-white">Anuncios que venden</h3>
+              <p className="mt-3 text-sm leading-6 text-white/70">
+                Menos intuición, más contenido con señales claras de venta.
+              </p>
+            </div>
+          </div>
 
-        <div className="rounded-lg bg-brand-navy p-5 text-white shadow-lift sm:p-7">
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              ["Para quién", "Negocios que venden productos o servicios con video corto."],
-              ["Qué validamos", "Métricas útiles, flujo de carga y reportes accionables."],
-              ["Qué recibís", "Acceso temprano, feedback directo y prioridad en mejoras."],
-              ["Sin compromiso", "Una primera versión simple para aprender rápido."],
-            ].map(([title, text]) => (
-              <article key={title} className="rounded-md border border-white/10 bg-white/[0.06] p-5">
-                <h3 className="font-display text-lg font-extrabold">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/66">{text}</p>
-              </article>
-            ))}
+          <div className="rounded-[2rem] bg-white/95 p-6 shadow-soft sm:p-8">
+            <p className="text-base font-bold text-brand-navy">Dejá tu mejor mail y te avisamos cuando abramos cupos</p>
+            <form className="mt-5 space-y-4">
+              <label htmlFor="beta-email" className="sr-only">
+                Email
+              </label>
+              <input
+                id="beta-email"
+                type="email"
+                placeholder="tu@email.com"
+                className="w-full rounded-2xl border border-brand-navy/10 bg-white px-4 py-4 text-sm text-brand-navy shadow-sm outline-none transition focus:border-brand-navy/70 focus:ring-2 focus:ring-brand-navy/10"
+              />
+              <button
+                type="submit"
+                className="w-full rounded-2xl bg-brand-navy px-5 py-4 text-sm font-bold text-white shadow-soft transition hover:-translate-y-0.5"
+              >
+                Sumarme a la beta
+              </button>
+            </form>
+            <p className="mt-4 text-xs leading-5 text-brand-ink/50">
+              Sin costo y sin compromiso. Solo te escribimos por novedades de Vendio.
+            </p>
           </div>
         </div>
       </div>
@@ -354,66 +430,44 @@ function MvpSection() {
   );
 }
 
-function LeadForm() {
-  const [status, setStatus] = useState("");
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    // Connect the real submission here:
-    // - POST to a future /api/leads endpoint
-    // - send to Formspree
-    // - insert in Supabase
-    // - redirect to a Google Forms endpoint
-    setStatus("Gracias. Tu interés quedó registrado en esta demo; falta conectar el envío real.");
-  }
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="contacto" className="bg-brand-navy py-20 text-white sm:py-24">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
-        <div>
-          <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-white/58">Acceso temprano</p>
-          <h2 className="mt-3 font-display text-3xl font-extrabold sm:text-4xl">Sumate al MVP de Vendio.pro</h2>
-          <p className="mt-5 text-lg leading-8 text-white/68">
-            Contanos dónde vendés y qué red usás más. Te vamos a contactar cuando abramos cupos de la beta.
-          </p>
-          <div className="mt-8 rounded-lg border border-white/10 bg-white/[0.06] p-5">
-            <p className="font-display text-2xl font-extrabold">Vendé más con el contenido que ya tenés</p>
-            <p className="mt-2 text-white/64">Menos intuición, más contenido con señales claras de venta.</p>
-          </div>
+    <section id="faq" className="bg-brand-paper py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-accent">FAQ</p>
+          <h2 className="mt-3 font-display text-3xl font-extrabold tracking-normal text-brand-navy sm:text-4xl">
+            Preguntas frecuentes
+          </h2>
         </div>
 
-        <form onSubmit={handleSubmit} className="rounded-lg bg-brand-paper p-5 text-brand-ink shadow-lift sm:p-7">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Nombre" name="name" placeholder="Tu nombre" autoComplete="name" />
-            <Field label="Email" name="email" placeholder="tu@email.com" type="email" autoComplete="email" />
-            <Field label="Negocio / marca" name="business" placeholder="Nombre de tu marca" className="sm:col-span-2" />
-            <label className="sm:col-span-2">
-              <span className="text-sm font-bold text-brand-ink/72">Red principal</span>
-              <select
-                name="network"
-                className="mt-2 h-12 w-full rounded-md border border-brand-navy/12 bg-white px-4 text-sm font-semibold text-brand-ink outline-none transition focus:border-brand-navy focus:ring-4 focus:ring-brand-navy/10"
-                defaultValue=""
-                required
+        <div className="mx-auto mt-10 max-w-3xl space-y-3">
+          {faqItems.map((item, idx) => {
+            const open = openIndex === idx;
+            return (
+              <div
+                key={item.question}
+                className={`rounded-3xl border border-brand-navy/8 bg-white px-6 py-5 shadow-sm transition ${
+                  open ? "ring-2 ring-brand-navy/10" : "hover:shadow-lg"
+                }`}
               >
-                <option value="" disabled>
-                  Elegí una opción
-                </option>
-                <option>Instagram</option>
-                <option>TikTok</option>
-                <option>YouTube Shorts</option>
-                <option>Otra</option>
-              </select>
-            </label>
-          </div>
+                <button
+                  type="button"
+                  className="w-full flex items-center justify-between"
+                  onClick={() => setOpenIndex(open ? -1 : idx)}
+                  aria-expanded={open}
+                >
+                  <p className="font-display text-base font-semibold text-brand-navy">{item.question}</p>
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-lg font-bold text-white">{open ? "−" : "+"}</span>
+                </button>
 
-          <button
-            type="submit"
-            className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-brand-navy px-5 py-3 text-sm font-extrabold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
-          >
-            Sumarme al MVP
-          </button>
-          {status && <p className="mt-4 rounded-md bg-white px-4 py-3 text-sm font-bold text-brand-navy">{status}</p>}
-        </form>
+                {open && <p className="mt-4 text-sm leading-7 text-brand-ink/70">{item.answer}</p>}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -550,7 +604,7 @@ export default function App() {
         <BenefitsSection />
         <HowItWorksSection />
         <MvpSection />
-        <LeadForm />
+        <FAQSection />
       </main>
       <Footer />
     </div>

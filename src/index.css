@@ -1,4 +1,4 @@
-@import url("https://api.fontshare.com/v2/css?f[]=lufga@800&f[]=plus-jakarta-sans@400,500,600,700,800&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=sora@400,500,700,800&f[]=lufga@800&f[]=plus-jakarta-sans@400,500,600,700,800&display=swap");
 
 @tailwind base;
 @tailwind components;

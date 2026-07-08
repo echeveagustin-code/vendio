@@ -15,6 +15,7 @@ export default {
       fontFamily: {
         display: ["Lufga", "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
         sans: ["Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
+        sora: ["Sora", "Lufga", "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
       },
       boxShadow: {
         soft: "0 18px 55px rgba(0, 37, 111, 0.13)",
