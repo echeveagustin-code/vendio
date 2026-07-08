@@ -231,8 +231,32 @@ function Navbar() {
 }
 
 function DashboardMockup() {
+  const trackRef = useRef(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const setDistance = () => {
+      // scrollHeight includes the duplicated content; we want half of it
+      const distance = track.scrollHeight / 2;
+      track.style.setProperty('--scroll-distance', `${distance}px`);
+    };
+
+    setDistance();
+    let ro = new ResizeObserver(() => setDistance());
+    ro.observe(track);
+    window.addEventListener('load', setDistance);
+    window.addEventListener('resize', setDistance);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('load', setDistance);
+      window.removeEventListener('resize', setDistance);
+    };
+  }, []);
   return (
-    <div className="dashboard-shell w-full min-w-0 max-w-[330px] rounded-lg border border-white/70 bg-white p-3 shadow-lift sm:mx-auto sm:max-w-[620px]">
+    <div className="dashboard-shell w-full min-w-0 max-w-[330px] rounded-lg border border-white/70 bg-white p-2 shadow-lift sm:mx-auto sm:max-w-[620px]">
       <div className="overflow-hidden rounded-md border border-brand-navy/10 bg-brand-paper">
         <div className="flex items-center justify-between gap-3 bg-brand-navy px-4 py-3 text-white">
           <div className="flex gap-1.5" aria-hidden="true">
@@ -243,7 +267,7 @@ function DashboardMockup() {
           <p className="truncate text-[10px] font-bold uppercase tracking-[0.14em] text-white/68 sm:text-xs sm:tracking-[0.18em]">Vendio Analytics</p>
         </div>
 
-        <div className="space-y-4 p-4 sm:p-5">
+        <div className="space-y-4 p-3 sm:p-4">
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
               ["Views", "39.1k"],
@@ -258,30 +282,8 @@ function DashboardMockup() {
             ))}
           </div>
 
-          <div className="space-y-3">
-            {videoRows.map((row) => (
-              <article key={row.name} className="grid gap-3 rounded-md border border-brand-navy/8 bg-white p-3 sm:grid-cols-[64px_1fr_auto] sm:items-center">
-                <div className={`h-16 rounded-md bg-gradient-to-br ${row.tone}`} aria-hidden="true" />
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="text-sm font-extrabold text-brand-ink">{row.name}</h3>
-                    <span className="rounded bg-brand-paper px-2 py-1 text-[11px] font-bold text-brand-accent">{row.channel}</span>
-                  </div>
-                  <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
-                    <Metric label="Views" value={row.views} />
-                    <Metric label="Clics" value={row.clicks} />
-                    <Metric label="Ventas" value={row.sales} />
-                  </div>
-                </div>
-                <div className="flex items-center justify-between gap-3 sm:block sm:text-right">
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-ink/40">Score</p>
-                    <p className="text-2xl font-extrabold text-brand-navy">{row.score}</p>
-                  </div>
-                  <span className="inline-flex rounded bg-brand-navy px-2.5 py-1.5 text-[11px] font-extrabold text-white">{row.label}</span>
-                </div>
-              </article>
-            ))}
+          <div className="relative overflow-hidden">
+            <ContinuousScroller rows={videoRows} duration={18} />
           </div>
         </div>
       </div>
@@ -294,6 +296,102 @@ function Metric({ label, value }) {
     <div>
       <p className="font-bold uppercase tracking-[0.1em] text-brand-ink/38">{label}</p>
       <p className="mt-0.5 font-extrabold text-brand-ink">{value}</p>
+    </div>
+  );
+}
+
+function VerticalScroller({ rows = [] }) {
+  const VISIBLE = rows.length; // show all rows height-wise
+  const [items, setItems] = useState(rows);
+  const trackRef = useRef(null);
+  const containerRef = useRef(null);
+  const tickingRef = useRef(false);
+
+  useEffect(() => {
+    setItems(rows);
+  }, [rows]);
+
+  useEffect(() => {
+    if (!trackRef.current || !containerRef.current) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let cardHeight = 0;
+    const measure = () => {
+      const first = trackRef.current.children[0];
+      if (first) {
+        const gap = parseFloat(getComputedStyle(trackRef.current).gap) || 12;
+        cardHeight = Math.round(first.getBoundingClientRect().height + gap);
+        containerRef.current.style.height = `${cardHeight * VISIBLE - gap}px`;
+      }
+    };
+
+    measure();
+    let interval = setInterval(() => {
+      if (tickingRef.current) return;
+      const track = trackRef.current;
+      if (!track || track.children.length === 0) return;
+      tickingRef.current = true;
+      const first = track.children[0];
+      const gap = parseFloat(getComputedStyle(track).gap) || 12;
+      const offset = first.getBoundingClientRect().height + gap;
+      track.style.transition = 'transform 0.8s ease';
+      track.style.transform = `translateY(-${offset}px)`;
+
+      const onEnd = () => {
+        track.style.transition = '';
+        track.style.transform = 'translateY(0)';
+        setItems((prev) => {
+          const [firstItem, ...rest] = prev;
+          return [...rest, firstItem];
+        });
+        tickingRef.current = false;
+        track.removeEventListener('transitionend', onEnd);
+      };
+
+      track.addEventListener('transitionend', onEnd);
+    }, 3800);
+
+    const onResize = () => {
+      measure();
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [VISIBLE]);
+
+  return (
+    <div ref={containerRef} className="overflow-hidden">
+      <div ref={trackRef} className="flex flex-col gap-3">
+        {items.map((row, i) => (
+          <article
+            key={`${row.name}-${i}`}
+            className="grid gap-3 rounded-md border border-brand-navy/8 bg-white p-3 sm:grid-cols-[64px_1fr_auto] sm:items-center"
+          >
+            <div className={`h-16 rounded-md bg-gradient-to-br ${row.tone}`} aria-hidden="true" />
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-sm font-extrabold text-brand-ink">{row.name}</h3>
+                <span className="rounded bg-brand-paper px-2 py-1 text-[11px] font-bold text-brand-accent">{row.channel}</span>
+              </div>
+              <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
+                <Metric label="Views" value={row.views} />
+                <Metric label="Clics" value={row.clicks} />
+                <Metric label="Ventas" value={row.sales} />
+              </div>
+            </div>
+            <div className="flex items-center justify-between gap-3 sm:block sm:text-right">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-ink/40">Score</p>
+                <p className="text-2xl font-extrabold text-brand-navy">{row.score}</p>
+              </div>
+              <span className="inline-flex rounded bg-brand-navy px-2.5 py-1.5 text-[11px] font-extrabold text-white">{row.label}</span>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   );
 }
@@ -335,6 +433,135 @@ function ProblemSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function ContinuousScroller({ rows = [], duration = 18 }) {
+  const containerRef = useRef(null);
+  const trackRef = useRef(null);
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const track = trackRef.current;
+    if (!container || !track) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Duplicate children in DOM so we can manipulate without React re-rendering
+    // (we render once; the loop will move DOM nodes)
+
+    // Measure total height and compute speed so full loop takes `duration` seconds
+    const measure = () => {
+      return track.scrollHeight; // total height of content (no duplication)
+    };
+
+    let total = measure();
+    // If total is 0, try again later
+    if (!total) {
+      total = measure();
+    }
+
+    // track contains duplicated rows; use only the unique half to compute speed
+    const uniqueTotal = total / 2 || total;
+    const speed = uniqueTotal / duration; // px per second
+
+    let last = performance.now();
+    let offset = 0;
+
+    const step = (now) => {
+      const dt = (now - last) / 1000;
+      last = now;
+      offset += speed * dt;
+      // transform
+      track.style.transform = `translateY(-${offset}px)`;
+
+      // If first item fully scrolled out, move it to the end and subtract its height
+      const first = track.children[0];
+      if (first) {
+        const gap = parseFloat(getComputedStyle(track).gap) || 12;
+        const firstH = first.getBoundingClientRect().height + gap;
+        if (offset >= firstH) {
+          // move the first element to the end
+          track.appendChild(first);
+          offset -= firstH;
+          // apply corrected transform immediately
+          track.style.transition = 'none';
+          track.style.transform = `translateY(-${offset}px)`;
+          // force reflow to clear transition if any
+          void track.offsetWidth;
+          track.style.transition = '';
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(step);
+    };
+
+    rafRef.current = requestAnimationFrame(step);
+
+    const onResize = () => {
+      total = measure();
+    };
+
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [rows, duration]);
+
+  return (
+    <div className="marquee-mask relative overflow-hidden mt-6" ref={containerRef}>
+      <div ref={trackRef} className="flex flex-col gap-3 will-change-transform">
+        {rows.map((row) => (
+          <article key={row.name} className="grid gap-3 rounded-md border border-brand-navy/8 bg-white p-3 sm:grid-cols-[64px_1fr_auto] sm:items-center">
+            <div className={`h-16 rounded-md bg-gradient-to-br ${row.tone}`} aria-hidden="true" />
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-sm font-extrabold text-brand-ink">{row.name}</h3>
+                <span className="rounded bg-brand-paper px-2 py-1 text-[11px] font-bold text-brand-accent">{row.channel}</span>
+              </div>
+              <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
+                <Metric label="Views" value={row.views} />
+                <Metric label="Clics" value={row.clicks} />
+                <Metric label="Ventas" value={row.sales} />
+              </div>
+            </div>
+            <div className="flex items-center justify-between gap-3 sm:block sm:text-right">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-ink/40">Score</p>
+                <p className="text-2xl font-extrabold text-brand-navy">{row.score}</p>
+              </div>
+              <span className="inline-flex rounded bg-brand-navy px-2.5 py-1.5 text-[11px] font-extrabold text-white">{row.label}</span>
+            </div>
+          </article>
+        ))}
+        {/* render again so there's content to append; duplication avoids blank gap at start-up */}
+        {rows.map((row) => (
+          <article key={`${row.name}-dup`} className="grid gap-3 rounded-md border border-brand-navy/8 bg-white p-3 sm:grid-cols-[64px_1fr_auto] sm:items-center">
+            <div className={`h-16 rounded-md bg-gradient-to-br ${row.tone}`} aria-hidden="true" />
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-sm font-extrabold text-brand-ink">{row.name}</h3>
+                <span className="rounded bg-brand-paper px-2 py-1 text-[11px] font-bold text-brand-accent">{row.channel}</span>
+              </div>
+              <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
+                <Metric label="Views" value={row.views} />
+                <Metric label="Clics" value={row.clicks} />
+                <Metric label="Ventas" value={row.sales} />
+              </div>
+            </div>
+            <div className="flex items-center justify-between gap-3 sm:block sm:text-right">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-ink/40">Score</p>
+                <p className="text-2xl font-extrabold text-brand-navy">{row.score}</p>
+              </div>
+              <span className="inline-flex rounded bg-brand-navy px-2.5 py-1.5 text-[11px] font-extrabold text-white">{row.label}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
   );
 }
 

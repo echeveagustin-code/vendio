@@ -99,3 +99,54 @@ a {
 .scrollbar-thin::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* Vertical marquee for dashboard cards */
+.vertical-marquee {
+  overflow: hidden;
+  position: relative;
+}
+.vertical-marquee__track {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* matches .space-y-3 spacing */
+  will-change: transform;
+  animation: marquee-vertical 18s linear infinite;
+}
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-1 * var(--scroll-distance, 50%)));
+  }
+}
+
+/* Slightly slower on reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .vertical-marquee__track {
+    animation: none;
+  }
+}
+
+/* Fade masks to hide gaps at top/bottom of scroller */
+.marquee-mask {
+  position: relative;
+}
+.marquee-mask::before,
+.marquee-mask::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2.5rem;
+  pointer-events: none;
+  z-index: 5;
+}
+.marquee-mask::before {
+  top: 0;
+  background: linear-gradient(180deg, #f1f2eb 0%, rgba(241,242,235,0) 100%);
+}
+.marquee-mask::after {
+  bottom: 0;
+  background: linear-gradient(0deg, #f1f2eb 0%, rgba(241,242,235,0) 100%);
+}
