@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import Dashboard from "./pages/Dashboard.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx";
+import ContentPage from "./pages/ContentPage.jsx";
+import AccountsPage from "./pages/AccountsPage.jsx";
 
 const navLinks = [
   { label: "Cómo funciona", href: "#como-funciona" },
   { label: "Beneficios", href: "#beneficios" },
   { label: "Dashboard", href: "#dashboard" },
   { label: "Calendario", href: "#calendario" },
+  { label: "Contenido", href: "#contenido" },
+  { label: "Cuentas", href: "#cuentas" },
   { label: "MVP", href: "#mvp" },
   { label: "Contacto", href: "#contacto" },
 ];
@@ -465,6 +469,8 @@ function getViewFromHash() {
   const hash = window.location.hash;
   if (hash === "#dashboard") return "dashboard";
   if (hash === "#calendario") return "calendario";
+  if (hash === "#contenido") return "contenido";
+  if (hash === "#cuentas") return "cuentas";
   return "landing";
 }
 
@@ -487,6 +493,14 @@ export default function App() {
 
   if (view === "calendario") {
     return <CalendarPage />;
+  }
+
+  if (view === "contenido") {
+    return <ContentPage />;
+  }
+
+  if (view === "cuentas") {
+    return <AccountsPage />;
   }
 
   return (

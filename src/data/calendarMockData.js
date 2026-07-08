@@ -6,7 +6,7 @@ export const calendarKpis = [
   { id: "posts", icon: "📆", label: "Publicaciones este mes", value: "42", change: "+6", positive: true },
   { id: "drafts", icon: "✏️", label: "Borradores", value: "9", change: "pendientes", positive: null },
   { id: "notes", icon: "📝", label: "Notas activas", value: "14", change: "en curso", positive: null },
-  { id: "empty", icon: "📭", label: "Días sin contenido", value: "6", change: "este mes", positive: null },
+  { id: "empty", icon: "👁️", label: "Visualizaciones", value: "109k", change: "11%", positive: true },
 ];
 
 export const weekDayLabels = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
@@ -33,7 +33,7 @@ export const noteCategoryStyles = {
 };
 
 export const scheduledPosts = [
-  { id: 1, day: 3, time: "10:00", title: "Outfit oficina lunes", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Publicado" },
+  { id: 1, day: 3, time: "10:00", title: "Outfit oficina lunes", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Programado" },
   { id: 2, day: 3, time: "19:30", title: "Tips de styling", type: "TikTok", platform: "TikTok", account: "@tienda.style", status: "Publicado" },
   { id: 3, day: 6, time: "09:00", title: "Look casual finde", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Programado" },
   { id: 4, day: 6, time: "14:00", title: "Behind the scenes", type: "Story", platform: "Instagram", account: "@outlet.style", status: "Revisión" },
@@ -129,10 +129,9 @@ export function buildCalendarGrid(year, month) {
   return cells;
 }
 
-export function filterPosts(posts, { platform, status }) {
+export function filterPosts(posts, { platform }) {
   return posts.filter((post) => {
     if (platform !== "Todas" && post.platform !== platform) return false;
-    if (status !== "Todos" && post.status !== status) return false;
     return true;
   });
 }

@@ -1,10 +1,9 @@
 export const sidebarMenu = [
   { id: "dashboard", label: "Dashboard", icon: "📊", href: "#dashboard" },
   { id: "calendario", label: "Calendario", icon: "📅", href: "#calendario" },
-  { id: "contenido", label: "Contenido", icon: "🎬", href: "#dashboard" },
-  { id: "cuentas", label: "Cuentas conectadas", icon: "🔗", href: "#dashboard" },
+  { id: "contenido", label: "Contenido", icon: "🎬", href: "#contenido" },
+  { id: "cuentas", label: "Cuentas", icon: "🔗", href: "#cuentas" },
   { id: "analiticas", label: "Analíticas", icon: "📈", href: "#dashboard" },
-  { id: "recomendaciones", label: "Recomendaciones", icon: "💡", href: "#dashboard" },
   { id: "configuracion", label: "Configuración", icon: "⚙️", href: "#dashboard" },
 ];
 
@@ -12,6 +11,7 @@ export const kpis = [
   { id: "videos", icon: "🎥", label: "Videos publicados", value: "47", change: "+12%", positive: true },
   { id: "ventas", icon: "💰", label: "Visitas atribuidas", value: "284", change: "+8%", positive: true },
   { id: "programadas", icon: "📆", label: "Publicaciones programadas", value: "18", change: "esta semana", positive: null },
+  { id: "visualizaciones", icon: "👁️", label: "visualizaciones", value: "123k", change: "+23%", positive: true },
   { id: "cuentas", icon: "👥", label: "Cuentas conectadas", value: "6", change: "activas", positive: null },
 ];
 
@@ -125,3 +125,4 @@ export const statusStyles = {
   success: "bg-emerald-50 text-emerald-700",
   warning: "bg-amber-50 text-amber-700",
 };
+
