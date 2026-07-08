@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Dashboard from "./pages/Dashboard.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx";
+import AccountsPage from "./pages/AccountsPage.jsx";
 
 const navLinks = [
   { label: "Cómo funciona", href: "#como-funciona" },
@@ -465,6 +466,7 @@ function getViewFromHash() {
   const hash = window.location.hash;
   if (hash === "#dashboard") return "dashboard";
   if (hash === "#calendario") return "calendario";
+  if (hash === "#cuentas") return "cuentas";
   return "landing";
 }
 
@@ -487,6 +489,10 @@ export default function App() {
 
   if (view === "calendario") {
     return <CalendarPage />;
+  }
+
+  if (view === "cuentas") {
+    return <AccountsPage />;
   }
 
   return (
