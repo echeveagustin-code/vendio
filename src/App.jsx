@@ -377,7 +377,7 @@ function LeadForm() {
             Contanos dónde vendés y qué red usás más. Te vamos a contactar cuando abramos cupos de la beta.
           </p>
           <div className="mt-8 rounded-lg border border-white/10 bg-white/[0.06] p-5">
-            <p className="font-display text-2xl font-extrabold">Videos que venden</p>
+            <p className="font-display text-2xl font-extrabold">Vendé más con el contenido que ya tenés</p>
             <p className="mt-2 text-white/64">Menos intuición, más contenido con señales claras de venta.</p>
           </div>
         </div>
@@ -441,7 +441,7 @@ function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 sm:flex-row sm:items-center sm:justify-between lg:px-8">
         <div>
           <Wordmark light />
-          <p className="mt-2 text-sm font-semibold text-white/58">Videos que venden</p>
+          <p className="mt-2 text-sm font-semibold text-white/58">Vendé más con el contenido que ya tenés</p>
         </div>
         <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-white/58">
           <a href="mailto:hola@vendio.pro" className="hover:text-white">
@@ -504,7 +504,7 @@ export default function App() {
             <div className="w-full min-w-0 max-w-[calc(100vw-2.5rem)] lg:max-w-none">
               <div className="inline-flex items-center gap-3 rounded-md border border-brand-navy/10 bg-white/52 px-3 py-2 shadow-sm">
                 <span className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                <span className="text-xs font-extrabold uppercase tracking-[0.17em] text-brand-ink/62">Videos que venden</span>
+                <span className="text-xs font-extrabold uppercase tracking-[0.17em] text-brand-ink/62">BETA PRIVADA · VENTAS POR REDES</span>
               </div>
               <h1 className="mt-7 max-w-4xl font-display text-[2.35rem] font-extrabold leading-[1.02] tracking-normal text-brand-navy sm:text-6xl sm:leading-[0.94] lg:text-7xl">
                 <span className="block sm:inline">Vendé más </span>
@@ -512,26 +512,33 @@ export default function App() {
                 <span className="block sm:inline">que ya subís.</span>
               </h1>
               <p className="mt-6 max-w-[330px] text-lg leading-8 text-brand-ink/60 sm:max-w-2xl sm:text-xl">
-              Gestioná varias cuentas desde un solo lugar, programá contenido y usá las métricas para entender qué videos generan ventas.
+                Vendio te ayuda a conectar tus cuentas, planificar contenido y descubrir qué publicaciones generan más consultas, interacción y ventas.
               </p>
               <div className="mt-8 flex max-w-[330px] flex-col gap-3 sm:max-w-none sm:flex-row">
+                <div className="relative w-full sm:max-w-[320px]">
+                  <input
+                    type="email"
+                    placeholder="tu@email.com"
+                    className="h-12 w-full rounded-xl border border-brand-navy/10 bg-white px-4 text-sm text-brand-ink outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20"
+                  />
+                </div>
                 <CtaButton href="#contacto" className="w-full sm:w-auto">
-                  Sumarme al MVP
-                </CtaButton>
-                <CtaButton href="#como-funciona" variant="secondary" className="w-full sm:w-auto">
-                  Ver cómo funciona
+                  Quiero acceso anticipado
                 </CtaButton>
               </div>
+              <p className="mt-4 max-w-[330px] text-sm font-semibold leading-6 text-brand-ink/55 sm:max-w-2xl">
+                Sumate gratis a la lista de espera. Te avisamos cuando abramos los primeros accesos.
+              </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <div className="flex -space-x-3" aria-hidden="true">
-                  {["bg-brand-navy", "bg-brand-accent", "bg-[#B8B8AE]", "bg-white"].map((color, index) => (
+                  {["bg-[#1D1D1F]", "bg-[#000000]", "bg-[#525252]", "bg-white"].map((color, index) => (
                     <span key={color} className={`h-10 w-10 rounded-full border-2 border-brand-paper ${color}`}>
                       {index === 3 && <span className="flex h-full items-center justify-center text-xs font-extrabold text-brand-navy">+</span>}
                     </span>
                   ))}
                 </div>
                 <p className="max-w-xs text-sm font-semibold leading-6 text-brand-ink/58">
-                  Para marcas, ecommerce y creadores que ya venden con contenido corto.
+                  Para marcas, tiendas y creadores que ya venden con contenido corto.
                 </p>
               </div>
             </div>
