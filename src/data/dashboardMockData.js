@@ -18,7 +18,7 @@ export const kpis = [
 export const todaySummary = [
   { label: "Publicaciones programadas", value: "3", icon: "📌" },
   { label: "Cuentas activas", value: "2", icon: "✅" },
-  { label: "Recomendaciones pendientes", value: "1", icon: "💡" },
+  { label: "Errores por revisar", value: "1", icon: "⚠️" },
 ];
 
 export const connectedAccounts = [
