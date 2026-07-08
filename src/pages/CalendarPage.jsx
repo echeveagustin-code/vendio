@@ -28,14 +28,15 @@ export default function CalendarPage() {
   const [selectedDay, setSelectedDay] = useState(14);
   const [viewMode, setViewMode] = useState("Mes");
   const [platformFilter, setPlatformFilter] = useState("Todas");
+  const [statusFilter, setStatusFilter] = useState("Todos");
   const [posts, setPosts] = useState(initialPosts);
   const [notes, setNotes] = useState(initialNotes);
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [noteOpen, setNoteOpen] = useState(false);
 
   const filteredPosts = useMemo(
-    () => filterPosts(posts, { platform: platformFilter }),
-    [posts, platformFilter],
+    () => filterPosts(posts, { platform: platformFilter, status: statusFilter }),
+    [posts, platformFilter, statusFilter],
   );
 
   const dayPosts = getPostsForDay(filteredPosts, selectedDay);
@@ -67,6 +68,7 @@ export default function CalendarPage() {
         type: data.type,
         platform,
         account: data.account,
+        status: data.status,
       },
     ]);
     setSelectedDay(data.day);
@@ -109,8 +111,10 @@ export default function CalendarPage() {
 
           <CalendarToolbar
             platform={platformFilter}
+            status={statusFilter}
             monthLabel={monthLabel}
             onPlatformChange={setPlatformFilter}
+            onStatusChange={setStatusFilter}
             onToday={goToToday}
             onPrevMonth={() => changeMonth(-1)}
             onNextMonth={() => changeMonth(1)}
