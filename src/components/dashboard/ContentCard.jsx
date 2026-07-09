@@ -9,14 +9,13 @@ function Metric({ label, value }) {
   );
 }
 
-export default function ContentCard({ title, score, badge, badgeTone, gradient, views, clicks, queries, sales }) {
+export default function ContentCard({ title, badge, badgeTone, gradient, views, clicks, queries, sales }) {
   return (
     <article className="overflow-hidden rounded-2xl border border-brand-navy/8 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft">
       <div className={`relative aspect-[16/10] bg-gradient-to-br ${gradient}`}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.22),transparent_55%)]" />
         <div className="absolute right-3 top-3 rounded-xl bg-white/95 px-2.5 py-1.5 text-center shadow-sm backdrop-blur">
           <p className="text-[9px] font-bold uppercase tracking-wider text-brand-ink/40">Score</p>
-          <p className="font-display text-xl font-extrabold leading-none text-brand-navy">{score}</p>
         </div>
         <button
           type="button"

@@ -24,7 +24,7 @@ export const todaySummary = [
 export const connectedAccounts = [
   { platform: "Instagram", handle: "@tienda.style", status: "Activa", statusTone: "success" },
   { platform: "TikTok", handle: "@tienda.style", status: "Activa", statusTone: "success" },
-  { platform: "Instagram", handle: "@outlet.style", status: "Pendiente", statusTone: "warning" },
+  { platform: "Instagram", handle: "@outlet.style2", status: "Pendiente", statusTone: "warning" },
 ];
 
 
@@ -32,7 +32,6 @@ export const featuredContent = [
   {
     id: 1,
     title: "Cómo usar este vestido de 3 formas distintas",
-    score: 94,
     badge: "Repetir",
     badgeTone: "repeat",
     gradient: "from-brand-navy to-[#2F5596]",
@@ -44,7 +43,6 @@ export const featuredContent = [
   {
     id: 2,
     title: "5 outfits para la semana de trabajo",
-    score: 88,
     badge: "Alto potencial",
     badgeTone: "potential",
     gradient: "from-[#0f3b8f] to-[#3d6bb3]",
@@ -56,7 +54,6 @@ export const featuredContent = [
   {
     id: 3,
     title: "Unboxing colección verano 2025",
-    score: 71,
     badge: "Mejor CTA",
     badgeTone: "cta",
     gradient: "from-brand-accent to-[#B29A8D]",
@@ -68,7 +65,6 @@ export const featuredContent = [
   {
     id: 4,
     title: "Tutorial look casual para el finde",
-    score: 55,
     badge: "Optimizar",
     badgeTone: "optimize",
     gradient: "from-[#6B7DB3] to-[#9BA8CC]",
