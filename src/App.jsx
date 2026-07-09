@@ -688,24 +688,10 @@ function Field({ label, name, placeholder, type = "text", autoComplete, classNam
 function Footer() {
   return (
     <footer className="bg-[#061631] py-10 text-white">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 lg:px-8">
         <div>
           <Wordmark light />
-          <p className="mt-2 text-sm font-semibold text-white/58">Vendé más con el contenido que ya tenés</p>
-        </div>
-        <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-white/58">
-          <a href="mailto:hola@vendio.pro" className="hover:text-white">
-            hola@vendio.pro
-          </a>
-          <a href="#como-funciona" className="hover:text-white">
-            Cómo funciona
-          </a>
-          <a href="#beneficios" className="hover:text-white">
-            Beneficios
-          </a>
-          <a href="#contacto" className="hover:text-white">
-            Contacto
-          </a>
+          <p className="mt-2 text-sm font-semibold text-white/58">Vendé más con el contenido que ya publicaste</p>
         </div>
       </div>
     </footer>
