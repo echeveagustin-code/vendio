@@ -11,8 +11,7 @@ export const kpis = [
   { id: "publicaciones", icon: "MdPostAdd", label: "Publicaciones realizadas", value: "47", change: "+12%", positive: true },
   { id: "ventas", icon: "MdAdsClick", label: "Visitas atribuidas", value: "284", change: "+8%", positive: true },
   { id: "visualizaciones", icon: "LuView", label: "Visualizaciones totales", value: "128.4K", change: "+8%", positive: true },
-  { id: "programadas", icon: "GrSchedulePlay", label: "Publicaciones programadas", value: "18", change: "esta semana", positive: null },
-  { id: "cuentas", icon: "MdManageAccounts", label: "Cuentas conectadas", value: "6", change: "", positive: null },
+  { id: "programadas", icon: "GrSchedulePlay", label: "Publicaciones programadas", value: "18", change: "", positive: null },
 ];
 
 export const todaySummary = [
