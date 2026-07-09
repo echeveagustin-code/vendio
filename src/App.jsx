@@ -175,6 +175,7 @@ function CtaButton({ href = "#contacto", children, variant = "primary", classNam
 function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [onDarkSection, setOnDarkSection] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -185,29 +186,47 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const darkSection = document.querySelector("#problema");
+    if (!darkSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setOnDarkSection(entry.isIntersecting);
+      },
+      {
+        rootMargin: "-80px 0px 0px 0px",
+        threshold: 0,
+      }
+    );
+
+    observer.observe(darkSection);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header className={`fixed left-0 right-0 top-0 z-50 border-b border-brand-navy/8 bg-brand-paper/88 backdrop-blur-xl transition-transform duration-300 ${scrolled ? "translate-y-0" : "-translate-y-full"}`}>
+    <header className={`fixed left-0 right-0 top-0 z-50 border-b backdrop-blur-xl transition-all duration-300 ${scrolled ? "translate-y-0" : "-translate-y-full"} ${onDarkSection ? "border-white/10 bg-brand-navy/88" : "border-brand-navy/8 bg-brand-paper/88"}`}>
       <nav className="relative mx-auto flex w-screen min-w-0 max-w-none items-center justify-between px-5 py-4 md:w-full md:max-w-7xl lg:px-8" aria-label="Principal">
-        <Wordmark />
+        <Wordmark light={onDarkSection} />
 
         <div className="flex items-center gap-4">
           <div className="hidden items-center gap-7 md:flex">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm font-semibold text-brand-ink/70 transition hover:text-brand-navy">
+              <a key={link.href} href={link.href} className={`text-sm font-semibold transition ${onDarkSection ? "text-white/70 hover:text-white" : "text-brand-ink/70 hover:text-brand-navy"}`}>
                 {link.label}
               </a>
             ))}
           </div>
 
           <div className="hidden md:block">
-            <CtaButton href="#acceso-anticipado" className="min-h-10 px-4 py-2">
+            <CtaButton href="#acceso-anticipado" className={`min-h-10 px-4 py-2 ${onDarkSection ? "!bg-white !text-brand-navy" : ""}`}>
               Quiero acceso anticipado
             </CtaButton>
           </div>
         </div>
         <button
           type="button"
-          className="mobile-menu-button fixed right-5 top-4 min-h-10 items-center justify-center rounded-md border border-brand-navy/12 px-3.5 text-sm font-bold text-brand-navy"
+          className={`mobile-menu-button fixed right-5 top-4 min-h-10 items-center justify-center rounded-md border px-3.5 text-sm font-bold ${onDarkSection ? "border-white/20 text-white" : "border-brand-navy/12 text-brand-navy"}`}
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
