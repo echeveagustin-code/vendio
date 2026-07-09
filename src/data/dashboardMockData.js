@@ -30,7 +30,7 @@ export const connectedAccounts = [
 export const featuredContent = [
   {
     id: 1,
-    title: "Cómo usar este vestido de 3 formas distintas",
+    title: "Presentacion producto",
     badge: "Repetir",
     badgeTone: "repeat",
     gradient: "from-brand-navy to-[#2F5596]",
@@ -41,7 +41,7 @@ export const featuredContent = [
   },
   {
     id: 2,
-    title: "5 outfits para la semana de trabajo",
+    title: "3 errores que frenan tus ventas online",
     badge: "Alto potencial",
     badgeTone: "potential",
     gradient: "from-[#0f3b8f] to-[#3d6bb3]",
@@ -52,7 +52,7 @@ export const featuredContent = [
   },
   {
     id: 3,
-    title: "Unboxing colección verano 2025",
+    title: "Por qué tantos clientes vuelven a comprar",
     badge: "Mejor CTA",
     badgeTone: "cta",
     gradient: "from-brand-accent to-[#B29A8D]",
@@ -63,7 +63,7 @@ export const featuredContent = [
   },
   {
     id: 4,
-    title: "Tutorial look casual para el finde",
+    title: "Lo que tenés que saber antes de comprar",
     badge: "Optimizar",
     badgeTone: "optimize",
     gradient: "from-[#6B7DB3] to-[#9BA8CC]",
