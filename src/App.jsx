@@ -6,7 +6,6 @@ import AccountsPage from "./pages/AccountsPage.jsx";
 
 const navLinks = [
   { label: "Cómo funciona", href: "#como-funciona" },
-  { label: "Acceso Anticipado", href: "#acceso-anticipado" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -569,7 +568,7 @@ function HowItWorksSection() {
 
 function MvpSection() {
   return (
-    <section id="mvp" className="bg-brand-navy py-20 text-white sm:py-24">
+    <section id="acceso-anticipado" className="bg-brand-navy py-20 text-white sm:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-center">
           <div>
