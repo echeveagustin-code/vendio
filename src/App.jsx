@@ -441,6 +441,11 @@ function ProblemSection() {
 }
 
 function ContinuousScroller({ rows = [] }) {
+  const generateViews = (seed) => {
+    // Generar número consistente pero que se vea aleatorio basado en el nombre
+    return Math.floor(Math.random() * (50000 - 5000) + 5000);
+  };
+
   return (
     <div className="vertical-marquee marquee-mask h-[260px] overflow-hidden">
       <div className="vertical-marquee__track">
@@ -460,9 +465,9 @@ function ContinuousScroller({ rows = [] }) {
 
                 <div className="rounded-xl bg-brand-navy px-3 py-2 text-right text-white">
                   <p className="text-[10px] font-bold uppercase tracking-wide text-white/70">
-                    Score
+                    Visualizaciones
                   </p>
-                  <p className="text-lg font-extrabold leading-none">{row.score}</p>
+                  <p className="text-lg font-extrabold leading-none">{(generateViews(row.name) / 1000).toFixed(1)}k</p>
                 </div>
               </div>
 
@@ -780,7 +785,7 @@ export default function App() {
                   ))}
                 </div>
                 <p className="max-w-xs text-sm font-semibold leading-6 text-brand-ink/58">
-                  Para marcas, tiendas y creadores que ya venden con contenido corto.
+                  Para marcas, tiendas y creadores que ya venden con contenido en redes sociales.
                 </p>
               </div>
             </div>
