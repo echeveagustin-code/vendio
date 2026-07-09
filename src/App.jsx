@@ -441,9 +441,16 @@ function ProblemSection() {
 }
 
 function ContinuousScroller({ rows = [] }) {
-  const generateViews = (seed) => {
-    // Generar número consistente pero que se vea aleatorio basado en el nombre
-    return Math.floor(Math.random() * (50000 - 5000) + 5000);
+  const generateViews = (name) => {
+    // Generar número consistente basado en el nombre (hash simple)
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = ((hash << 5) - hash) + name.charCodeAt(i);
+      hash = hash & hash;
+    }
+    // Convertir hash a número entre 5000 y 50000
+    const num = Math.abs(hash) % 45000 + 5000;
+    return num;
   };
 
   return (
@@ -494,9 +501,9 @@ function ContinuousScroller({ rows = [] }) {
 
                 <div className="rounded-xl bg-brand-navy px-3 py-2 text-right text-white">
                   <p className="text-[10px] font-bold uppercase tracking-wide text-white/70">
-                    Score
+                    Visualizaciones
                   </p>
-                  <p className="text-lg font-extrabold leading-none">{row.score}</p>
+                  <p className="text-lg font-extrabold leading-none">{(generateViews(row.name) / 1000).toFixed(1)}k</p>
                 </div>
               </div>
 
