@@ -30,7 +30,7 @@ export const connectedAccounts = [
 export const featuredContent = [
   {
     id: 1,
-    title: "Presentacion producto",
+    title: "Presentación producto",
     badge: "Repetir",
     badgeTone: "repeat",
     gradient: "from-brand-navy to-[#2F5596]",
