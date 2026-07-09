@@ -82,7 +82,7 @@ const faqItems = [
   {
     question: "¿Vendio publica automáticamente?",
     answer:
-      "La idea es que puedas planificar y programar contenido desde Vendio. Algunas funciones dependerán de las integraciones disponibles durante la beta.",
+      "Sí. Vendio busca simplificar la publicación automática en varias redes, para que puedas planificar, programar y reutilizar contenido desde un solo lugar",
   },
   {
     question: "¿Puedo conectar varias cuentas?",
@@ -449,7 +449,7 @@ function ProblemSection() {
         <SectionHeader
           light
           eyebrow="Te pasa que..."
-          title="¿Publicás todos los días pero no sabés cuales venden?"
+          title="¿Te gustaría aprovechar mejor el contenido que ya publicás para vender más?"
           text="Vendio.pro te ayuda a mantener tus redes activas reutilizando tus mejores videos en varias cuentas y plataformas."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-3">
