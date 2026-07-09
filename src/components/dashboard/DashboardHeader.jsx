@@ -49,13 +49,7 @@ export default function DashboardHeader({ onMenuToggle }) {
             Programar contenido
           </button>
 
-          <div
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-navy to-[#0f3b8f] text-sm font-extrabold text-white shadow-sm"
-            title="Usuario"
-            aria-label="Perfil de usuario"
-          >
-            M
-          </div>
+
         </div>
       </div>
     </header>

@@ -62,18 +62,14 @@ export default function Sidebar({ mobileOpen, onClose, activePage = "dashboard" 
         </nav>
 
         <div className="border-t border-brand-navy/6 p-4">
-          <div className="rounded-2xl bg-gradient-to-br from-brand-navy to-[#0f3b8f] p-4 text-white shadow-soft">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-white/60">Plan Pro</p>
-            <p className="mt-1 font-display text-lg font-extrabold">3 cuentas activas</p>
-            <p className="mt-2 text-xs leading-5 text-white/70">
-              Conectá hasta 10 cuentas y programá contenido ilimitado.
-            </p>
-            <button
-              type="button"
-              className="mt-4 w-full rounded-lg bg-white/15 px-3 py-2 text-xs font-bold text-white transition hover:bg-white/25"
-            >
-              Ver plan
-            </button>
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold text-lg">
+              A
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-brand-ink">Agustin Echeverria</p>
+              <p className="text-xs text-brand-ink/60">Miembro Pro</p>
+            </div>
           </div>
         </div>
       </aside>
