@@ -637,7 +637,7 @@ function MvpSection() {
               Estamos preparando Vendio. Sumate a la beta.
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-7 text-white/75">
-              Te avisamos cuando abramos los primeros accesos. Queremos construir Vendio con negocios que ya venden por redes y necesitan una forma más simple de organizarse.
+              Vendio se está construyendo con el feedback de negocios reales que venden por redes. Sumate ahora y ayudanos a decidir que características implementar.
             </p>
             <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
               <h3 className="font-display text-xl font-bold text-white">Anuncios que venden</h3>
