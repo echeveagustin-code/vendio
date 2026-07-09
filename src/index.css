@@ -105,19 +105,28 @@ a {
   overflow: hidden;
   position: relative;
 }
+
 .vertical-marquee__track {
   display: flex;
   flex-direction: column;
-  gap: 12px; /* matches .space-y-3 spacing */
   will-change: transform;
-  animation: marquee-vertical 18s linear infinite;
+  animation: marquee-vertical 14s linear infinite;
 }
+
+.vertical-marquee__group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 12px;
+}
+
 @keyframes marquee-vertical {
   from {
     transform: translateY(0);
   }
+
   to {
-    transform: translateY(calc(-1 * var(--scroll-distance, 50%)));
+    transform: translateY(-50%);
   }
 }
 

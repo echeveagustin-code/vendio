@@ -231,30 +231,6 @@ function Navbar() {
 }
 
 function DashboardMockup() {
-  const trackRef = useRef(null);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const setDistance = () => {
-      // scrollHeight includes the duplicated content; we want half of it
-      const distance = track.scrollHeight / 2;
-      track.style.setProperty('--scroll-distance', `${distance}px`);
-    };
-
-    setDistance();
-    let ro = new ResizeObserver(() => setDistance());
-    ro.observe(track);
-    window.addEventListener('load', setDistance);
-    window.addEventListener('resize', setDistance);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener('load', setDistance);
-      window.removeEventListener('resize', setDistance);
-    };
-  }, []);
   return (
     <div className="dashboard-shell w-full min-w-0 max-w-[330px] rounded-lg border border-white/70 bg-white p-2 shadow-lift sm:mx-auto sm:max-w-[620px]">
       <div className="overflow-hidden rounded-md border border-brand-navy/10 bg-brand-paper">
@@ -283,7 +259,7 @@ function DashboardMockup() {
           </div>
 
           <div className="relative overflow-hidden">
-            <ContinuousScroller rows={videoRows} duration={18} />
+            <ContinuousScroller rows={videoRows} />
           </div>
         </div>
       </div>
@@ -436,130 +412,67 @@ function ProblemSection() {
   );
 }
 
-function ContinuousScroller({ rows = [], duration = 18 }) {
-  const containerRef = useRef(null);
-  const trackRef = useRef(null);
-  const rafRef = useRef(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const track = trackRef.current;
-    if (!container || !track) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    // Duplicate children in DOM so we can manipulate without React re-rendering
-    // (we render once; the loop will move DOM nodes)
-
-    // Measure total height and compute speed so full loop takes `duration` seconds
-    const measure = () => {
-      return track.scrollHeight; // total height of content (no duplication)
-    };
-
-    let total = measure();
-    // If total is 0, try again later
-    if (!total) {
-      total = measure();
-    }
-
-    // track contains duplicated rows; use only the unique half to compute speed
-    const uniqueTotal = total / 2 || total;
-    const speed = uniqueTotal / duration; // px per second
-
-    let last = performance.now();
-    let offset = 0;
-
-    const step = (now) => {
-      const dt = (now - last) / 1000;
-      last = now;
-      offset += speed * dt;
-      // transform
-      track.style.transform = `translateY(-${offset}px)`;
-
-      // If first item fully scrolled out, move it to the end and subtract its height
-      const first = track.children[0];
-      if (first) {
-        const gap = parseFloat(getComputedStyle(track).gap) || 12;
-        const firstH = first.getBoundingClientRect().height + gap;
-        if (offset >= firstH) {
-          // move the first element to the end
-          track.appendChild(first);
-          offset -= firstH;
-          // apply corrected transform immediately
-          track.style.transition = 'none';
-          track.style.transform = `translateY(-${offset}px)`;
-          // force reflow to clear transition if any
-          void track.offsetWidth;
-          track.style.transition = '';
-        }
-      }
-
-      rafRef.current = requestAnimationFrame(step);
-    };
-
-    rafRef.current = requestAnimationFrame(step);
-
-    const onResize = () => {
-      total = measure();
-    };
-
-    window.addEventListener('resize', onResize);
-
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      window.removeEventListener('resize', onResize);
-    };
-  }, [rows, duration]);
-
+function ContinuousScroller({ rows = [] }) {
   return (
-    <div className="marquee-mask relative overflow-hidden mt-6" ref={containerRef}>
-      <div ref={trackRef} className="flex flex-col gap-3 will-change-transform">
-        {rows.map((row) => (
-          <article key={row.name} className="grid gap-3 rounded-md border border-brand-navy/8 bg-white p-3 sm:grid-cols-[64px_1fr_auto] sm:items-center">
-            <div className={`h-16 rounded-md bg-gradient-to-br ${row.tone}`} aria-hidden="true" />
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-sm font-extrabold text-brand-ink">{row.name}</h3>
-                <span className="rounded bg-brand-paper px-2 py-1 text-[11px] font-bold text-brand-accent">{row.channel}</span>
+    <div className="vertical-marquee marquee-mask h-[260px] overflow-hidden">
+      <div className="vertical-marquee__track">
+        <div className="vertical-marquee__group">
+          {rows.map((row) => (
+            <article
+              key={`first-${row.name}`}
+              className="rounded-2xl border border-brand-navy/10 bg-white p-4 shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="font-bold text-brand-ink">{row.name}</h3>
+                  <p className="mt-1 text-xs font-semibold text-brand-ink/52">
+                    {row.channel}
+                  </p>
+                </div>
+
+                <div className="rounded-xl bg-brand-navy px-3 py-2 text-right text-white">
+                  <p className="text-[10px] font-bold uppercase tracking-wide text-white/70">
+                    Score
+                  </p>
+                  <p className="text-lg font-extrabold leading-none">{row.score}</p>
+                </div>
               </div>
-              <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
-                <Metric label="Views" value={row.views} />
-                <Metric label="Clics" value={row.clicks} />
-                <Metric label="Ventas" value={row.sales} />
+
+              <div className="mt-3 inline-flex rounded-full bg-brand-navy/6 px-3 py-1 text-xs font-bold text-brand-navy">
+                {row.label}
               </div>
-            </div>
-            <div className="flex items-center justify-between gap-3 sm:block sm:text-right">
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-ink/40">Score</p>
-                <p className="text-2xl font-extrabold text-brand-navy">{row.score}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="vertical-marquee__group" aria-hidden="true">
+          {rows.map((row) => (
+            <article
+              key={`second-${row.name}`}
+              className="rounded-2xl border border-brand-navy/10 bg-white p-4 shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="font-bold text-brand-ink">{row.name}</h3>
+                  <p className="mt-1 text-xs font-semibold text-brand-ink/52">
+                    {row.channel}
+                  </p>
+                </div>
+
+                <div className="rounded-xl bg-brand-navy px-3 py-2 text-right text-white">
+                  <p className="text-[10px] font-bold uppercase tracking-wide text-white/70">
+                    Score
+                  </p>
+                  <p className="text-lg font-extrabold leading-none">{row.score}</p>
+                </div>
               </div>
-              <span className="inline-flex rounded bg-brand-navy px-2.5 py-1.5 text-[11px] font-extrabold text-white">{row.label}</span>
-            </div>
-          </article>
-        ))}
-        {/* render again so there's content to append; duplication avoids blank gap at start-up */}
-        {rows.map((row) => (
-          <article key={`${row.name}-dup`} className="grid gap-3 rounded-md border border-brand-navy/8 bg-white p-3 sm:grid-cols-[64px_1fr_auto] sm:items-center">
-            <div className={`h-16 rounded-md bg-gradient-to-br ${row.tone}`} aria-hidden="true" />
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-sm font-extrabold text-brand-ink">{row.name}</h3>
-                <span className="rounded bg-brand-paper px-2 py-1 text-[11px] font-bold text-brand-accent">{row.channel}</span>
+
+              <div className="mt-3 inline-flex rounded-full bg-brand-navy/6 px-3 py-1 text-xs font-bold text-brand-navy">
+                {row.label}
               </div>
-              <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
-                <Metric label="Views" value={row.views} />
-                <Metric label="Clics" value={row.clicks} />
-                <Metric label="Ventas" value={row.sales} />
-              </div>
-            </div>
-            <div className="flex items-center justify-between gap-3 sm:block sm:text-right">
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-ink/40">Score</p>
-                <p className="text-2xl font-extrabold text-brand-navy">{row.score}</p>
-              </div>
-              <span className="inline-flex rounded bg-brand-navy px-2.5 py-1.5 text-[11px] font-extrabold text-white">{row.label}</span>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   );
