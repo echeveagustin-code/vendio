@@ -231,6 +231,34 @@ function Navbar() {
 }
 
 function DashboardMockup() {
+  const [stats, setStats] = useState({
+    views: Math.floor(Math.random() * (80000 - 2500) + 2500),
+    clics: Math.floor(Math.random() * (5000 - 100) + 100),
+    publicaciones: Math.floor(Math.random() * (500 - 50) + 50),
+    ventas: Math.floor(Math.random() * (200 - 10) + 10),
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStats((prev) => ({
+        views: prev.views + Math.floor(Math.random() * 10) + 2,
+        clics: prev.clics + Math.floor(Math.random() * 2),
+        publicaciones: prev.publicaciones + (Math.random() * 0.3 + 0.1),
+        ventas: prev.ventas + (Math.random() * 0.3 + 0.1),
+      }));
+    }, 300);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatNumber = (num) => {
+    const rounded = Math.round(num * 10) / 10;
+    if (rounded >= 1000) {
+      return (rounded / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    }
+    return Math.round(rounded).toString();
+  };
+
   return (
     <div className="dashboard-shell w-full min-w-0 max-w-[330px] rounded-lg border border-white/70 bg-white p-2 shadow-lift sm:mx-auto sm:max-w-[620px]">
       <div className="overflow-hidden rounded-md border border-brand-navy/10 bg-brand-paper">
@@ -246,14 +274,14 @@ function DashboardMockup() {
         <div className="space-y-4 p-3 sm:p-4">
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              ["Views", "39.1k"],
-              ["Clics", "1.2k"],
-              ["Consultas", "186"],
-              ["Ventas", "67"],
+              ["Views", formatNumber(stats.views)],
+              ["Clics", formatNumber(stats.clics)],
+              ["Publicaciones", formatNumber(stats.publicaciones)],
+              ["Ventas", formatNumber(stats.ventas)],
             ].map(([label, value]) => (
               <div key={label} className="rounded-md border border-brand-navy/8 bg-white px-3 py-3">
                 <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-ink/42">{label}</p>
-                <p className="mt-1 text-xl font-extrabold text-brand-navy">{value}</p>
+                <p className="mt-1 text-xl font-extrabold text-brand-navy transition-all duration-300">{value}</p>
               </div>
             ))}
           </div>
