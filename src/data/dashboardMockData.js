@@ -8,17 +8,17 @@ export const sidebarMenu = [
 ];
 
 export const kpis = [
-  { id: "publicaciones", icon: "📝", label: "Publicaciones realizadas", value: "47", change: "+12%", positive: true },
-  { id: "ventas", icon: "💰", label: "Visitas atribuidas", value: "284", change: "+8%", positive: true },
-  { id: "visualizaciones", icon: "👁️", label: "Visualizaciones totales", value: "128.4K", change: "+8%", positive: true },
-  { id: "programadas", icon: "📆", label: "Publicaciones programadas", value: "18", change: "esta semana", positive: null },
-  { id: "cuentas", icon: "👥", label: "Cuentas conectadas", value: "6", change: "activas", positive: null },
+  { id: "publicaciones", icon: "MdPostAdd", label: "Publicaciones realizadas", value: "47", change: "+12%", positive: true },
+  { id: "ventas", icon: "MdAdsClick", label: "Visitas atribuidas", value: "284", change: "+8%", positive: true },
+  { id: "visualizaciones", icon: "LuView", label: "Visualizaciones totales", value: "128.4K", change: "+8%", positive: true },
+  { id: "programadas", icon: "GrSchedulePlay", label: "Publicaciones programadas", value: "18", change: "esta semana", positive: null },
+  { id: "cuentas", icon: "MdManageAccounts", label: "Cuentas conectadas", value: "6", change: "activas", positive: null },
 ];
 
 export const todaySummary = [
-  { label: "Publicaciones programadas", value: "3", icon: "📌" },
-  { label: "Cuentas activas", value: "2", icon: "✅" },
-  { label: "Errores por revisar", value: "1", icon: "⚠️" },
+  { label: "Publicaciones programadas", value: "3", icon: "GrSchedulePlay" },
+  { label: "Cuentas utilizadas", value: "2", icon: "MdSupervisorAccount" },
+  { label: "Notificaciones por atender", value: "1", icon: "FiAlertTriangle" },
 ];
 
 export const connectedAccounts = [

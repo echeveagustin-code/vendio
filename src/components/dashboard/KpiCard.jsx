@@ -1,9 +1,27 @@
+import { MdPostAdd } from "react-icons/md";
+import { MdManageAccounts } from "react-icons/md";
+import { GrSchedulePlay } from "react-icons/gr";
+import { MdAdsClick } from "react-icons/md";
+import { LuView } from "react-icons/lu";
+
+
+
+const kpiIconMap = {
+  MdPostAdd,
+  MdManageAccounts,
+  GrSchedulePlay,
+  MdAdsClick,
+  LuView,
+};
+
 export default function KpiCard({ icon, label, value, change, positive }) {
+  const IconComponent = kpiIconMap[icon];
+
   return (
     <article className="rounded-2xl border border-brand-navy/6 bg-white p-4 shadow-sm transition hover:shadow-soft">
       <div className="flex items-start justify-between gap-2">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f6f7fb] text-lg" aria-hidden="true">
-          {icon}
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f6f7fb]/5 text-lg text-brand-navy" aria-hidden="true">
+          {IconComponent ? <IconComponent className="text-xl" /> : icon}
         </span>
         {change && (
           <span
