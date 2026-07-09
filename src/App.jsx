@@ -596,6 +596,37 @@ function HowItWorksSection() {
 }
 
 function MvpSection() {
+  const [email, setEmail] = useState("");
+  const [formStatus, setFormStatus] = useState("idle");
+
+  const handleWaitlistSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!email) return;
+
+    setFormStatus("loading");
+
+    try {
+      const response = await fetch("https://formspree.io/f/mjgqqrlg", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error("No se pudo enviar el formulario.");
+      }
+
+      setFormStatus("success");
+      setEmail("");
+    } catch (error) {
+      setFormStatus("error");
+    }
+  };
+
   return (
     <section id="acceso-anticipado" className="bg-brand-navy py-20 text-white sm:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
@@ -618,22 +649,37 @@ function MvpSection() {
 
           <div className="rounded-[2rem] bg-white/95 p-6 shadow-soft sm:p-8">
             <p className="text-base font-bold text-brand-navy">Dejá tu mejor mail y te avisamos cuando abramos cupos</p>
-            <form className="mt-5 space-y-4">
+            <form onSubmit={handleWaitlistSubmit} className="mt-5 space-y-4">
               <label htmlFor="beta-email" className="sr-only">
                 Email
               </label>
               <input
                 id="beta-email"
+                name="email"
                 type="email"
                 placeholder="tu@email.com"
+                required
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
                 className="w-full rounded-2xl border border-brand-navy/10 bg-white px-4 py-4 text-sm text-brand-navy shadow-sm outline-none transition focus:border-brand-navy/70 focus:ring-2 focus:ring-brand-navy/10"
               />
               <button
                 type="submit"
-                className="w-full rounded-2xl bg-brand-navy px-5 py-4 text-sm font-bold text-white shadow-soft transition hover:-translate-y-0.5"
+                disabled={formStatus === "loading"}
+                className="w-full rounded-2xl bg-brand-navy px-5 py-4 text-sm font-bold text-white shadow-soft transition hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sumarme a la beta
+                {formStatus === "loading" ? "Enviando..." : "Sumarme a la beta"}
               </button>
+              {formStatus === "success" && (
+                <p className="text-sm font-semibold text-emerald-600">
+                  ✓ Listo, ya estás en la lista.
+                </p>
+              )}
+              {formStatus === "error" && (
+                <p className="text-sm font-semibold text-red-600">
+                  Hubo un error. Probá de nuevo.
+                </p>
+              )}
             </form>
             <p className="mt-4 text-xs leading-5 text-brand-ink/50">
               Sin costo y sin compromiso. Solo te escribimos por novedades de Vendio.
@@ -727,6 +773,36 @@ function getViewFromHash() {
 
 export default function App() {
   const [view, setView] = useState(getViewFromHash);
+  const [heroEmail, setHeroEmail] = useState("");
+  const [heroFormStatus, setHeroFormStatus] = useState("idle");
+
+  const handleHeroSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!heroEmail) return;
+
+    setHeroFormStatus("loading");
+
+    try {
+      const response = await fetch("https://formspree.io/f/mjgqqrlg", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ email: heroEmail }),
+      });
+
+      if (!response.ok) {
+        throw new Error("No se pudo enviar el formulario.");
+      }
+
+      setHeroFormStatus("success");
+      setHeroEmail("");
+    } catch (error) {
+      setHeroFormStatus("error");
+    }
+  };
 
   useEffect(() => {
     function syncView() {
@@ -774,18 +850,32 @@ export default function App() {
               <p className="mt-6 max-w-[330px] text-lg leading-8 text-brand-ink/60 sm:max-w-2xl sm:text-xl">
                 Vendio te ayuda a conectar tus cuentas, planificar contenido y descubrir qué publicaciones generan más consultas, interacción y ventas.
               </p>
-              <div className="mt-8 flex max-w-[330px] flex-col gap-3 sm:max-w-none sm:flex-row">
+              <form onSubmit={handleHeroSubmit} className="mt-8 flex max-w-[330px] flex-col gap-3 sm:max-w-none sm:flex-row">
                 <div className="relative w-full sm:max-w-[320px]">
                   <input
+                    name="email"
                     type="email"
                     placeholder="tu@email.com"
+                    required
+                    value={heroEmail}
+                    onChange={(event) => setHeroEmail(event.target.value)}
                     className="h-12 w-full rounded-xl border border-brand-navy/10 bg-white px-4 text-sm text-brand-ink outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20"
                   />
                 </div>
-                <CtaButton href="#contacto" className="w-full sm:w-auto">
-                  Quiero acceso anticipado
-                </CtaButton>
-              </div>
+                <button type="submit" disabled={heroFormStatus === "loading"} className="inline-flex min-h-12 items-center justify-center rounded-md px-5 py-3 text-sm font-bold transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 bg-brand-navy text-white shadow-soft hover:-translate-y-0.5 hover:shadow-lift w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed">
+                  {heroFormStatus === "loading" ? "Enviando..." : "Quiero acceso anticipado"}
+                </button>
+              </form>
+              {heroFormStatus === "success" && (
+                <p className="mt-3 text-sm font-semibold text-emerald-600">
+                  ✓ Listo, ya estás en la lista.
+                </p>
+              )}
+              {heroFormStatus === "error" && (
+                <p className="mt-3 text-sm font-semibold text-red-600">
+                  Hubo un error. Probá de nuevo.
+                </p>
+              )}
               <p className="mt-4 max-w-[330px] text-sm font-semibold leading-6 text-brand-ink/55 sm:max-w-2xl">
                 Sumate gratis a la lista de espera. Te avisamos cuando abramos los primeros accesos.
               </p>
