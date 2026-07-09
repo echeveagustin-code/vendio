@@ -25,13 +25,34 @@ export default function ContentCard({
 }) {
   return (
     <article className="overflow-hidden rounded-2xl border border-brand-navy/6 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
-      <div className={`relative h-36 bg-gradient-to-br ${gradient}`}>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.35),transparent_30%)]" />
+      <div className="flex justify-center bg-[#f6f7fb] px-4 pt-4">
+        <div className="relative aspect-[9/16] h-[230px] overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-brand-navy/8">
+          <div className={`absolute inset-0 bg-gradient-to-br ${gradient}`} />
 
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-xl text-white backdrop-blur">
-            ▶
-          </span>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.42),transparent_32%)]" />
+
+          <div className="absolute inset-0 backdrop-blur-[2px]" />
+
+          <div className="absolute left-3 top-3 flex items-center gap-2">
+            <div className="h-7 w-7 rounded-full bg-white/75 shadow-sm" />
+            <div>
+              <div className="h-2 w-16 rounded-full bg-white/80" />
+              <div className="mt-1.5 h-1.5 w-10 rounded-full bg-white/55" />
+            </div>
+          </div>
+
+
+
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/25 text-xl text-white shadow-sm backdrop-blur">
+              ▶
+            </span>
+          </div>
+
+
+
+          <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-black/25 p-3 backdrop-blur">
+          </div>
         </div>
       </div>
 
@@ -54,7 +75,7 @@ export default function ContentCard({
           <Metric label="Views" value={views} />
           <Metric label="Clicks" value={clicks} />
           <Metric label="Interacciones" value={queries} />
-          <Metric label="Visitas a pagina web" value={sales} />
+          <Metric label="Visitas a página web" value={sales} />
         </div>
       </div>
     </article>
