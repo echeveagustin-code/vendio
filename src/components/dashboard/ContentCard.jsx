@@ -53,8 +53,8 @@ export default function ContentCard({
         <div className="mt-4 grid grid-cols-2 gap-3 rounded-xl bg-[#f6f7fb] p-3">
           <Metric label="Views" value={views} />
           <Metric label="Clicks" value={clicks} />
-          <Metric label="Consultas" value={queries} />
-          <Metric label="Ventas" value={sales} />
+          <Metric label="Interacciones" value={queries} />
+          <Metric label="Visitas a pagina web" value={sales} />
         </div>
       </div>
     </article>
