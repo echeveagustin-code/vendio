@@ -159,3 +159,9 @@ a {
   bottom: 0;
   background: linear-gradient(0deg, #f1f2eb 0%, rgba(241,242,235,0) 100%);
 }
+
+/* Text shadow for logo contrast */
+.text-shadow-logo {
+  text-shadow: 1px 1px 2px rgba(0, 37, 111, 0.3), 
+               0 0 8px rgba(0, 37, 111, 0.15);
+}

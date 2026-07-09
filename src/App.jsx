@@ -152,7 +152,7 @@ function Wordmark({ light = false }) {
   return (
     <a href="#inicio" className="font-sora text-[1.45rem] font-extrabold tracking-normal">
       <span className={light ? "text-brand-paper" : "text-brand-navy"}>Ven</span>
-      <span className={light ? "text-white/72" : "text-[#FFF7E6]"}>dio.pro</span>
+      <span className={light ? "text-white/72" : "text-[#FFF7E6] text-shadow-logo"}>dio.pro</span>
     </a>
   );
 }
@@ -174,9 +174,19 @@ function CtaButton({ href = "#contacto", children, variant = "primary", classNam
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-brand-navy/8 bg-brand-paper/88 backdrop-blur-xl">
+    <header className={`fixed left-0 right-0 top-0 z-50 border-b border-brand-navy/8 bg-brand-paper/88 backdrop-blur-xl transition-transform duration-300 ${scrolled ? "translate-y-0" : "-translate-y-full"}`}>
       <nav className="relative mx-auto flex w-screen min-w-0 max-w-none items-center justify-between px-5 py-4 md:w-full md:max-w-7xl lg:px-8" aria-label="Principal">
         <Wordmark />
 
@@ -421,7 +431,7 @@ function ProblemSection() {
           light
           eyebrow="Te pasa que..."
           title="¿Publicás todos los días pero no sabés cuales venden?"
-          text="Vendio.pro te muestra qué contenido funciona, qué publicaciones generan consultas y qué formatos conviene repetir."
+          text="Vendio.pro te ayuda a mantener tus redes activas reutilizando tus mejores videos en varias cuentas y plataformas."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {problemCards.map((card, index) => (
@@ -744,17 +754,17 @@ export default function App() {
     <div className="min-h-screen overflow-x-hidden bg-brand-paper text-brand-ink">
       <Navbar />
       <main>
-        <section id="inicio" className="relative overflow-hidden pt-28 sm:pt-32">
+        <section id="inicio" className="relative overflow-hidden pt-10 sm:pt-12">
           <div className="hero-grid mx-auto grid w-full min-w-0 max-w-7xl items-center gap-12 px-5 pb-20 pt-8 lg:grid-cols-[0.95fr_1.05fr] lg:px-8 lg:pb-24">
             <div className="w-full min-w-0 max-w-[calc(100vw-2.5rem)] lg:max-w-none">
               <div className="inline-flex items-center gap-3 rounded-md border border-brand-navy/10 bg-white/52 px-3 py-2 shadow-sm">
                 <span className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                <span className="text-xs font-extrabold uppercase tracking-[0.17em] text-brand-ink/62">BETA PRIVADA · VENTAS POR REDES</span>
+                <span className="text-xs font-extrabold uppercase tracking-[0.17em] text-brand-ink/62">TU HERRAMIENTA IDEAL PARA VENDER POR REDES</span>
               </div>
               <h1 className="mt-7 max-w-4xl font-display text-[2.35rem] font-extrabold leading-[1.02] tracking-normal text-brand-navy sm:text-6xl sm:leading-[0.94] lg:text-7xl">
                 <span className="block sm:inline">Vendé más </span>
-                <span className="block sm:inline">con los videos </span>
-                <span className="block sm:inline">que ya subís.</span>
+                <span className="block sm:inline">con el contenido </span>
+                <span className="block sm:inline">que ya publicaste.</span>
               </h1>
               <p className="mt-6 max-w-[330px] text-lg leading-8 text-brand-ink/60 sm:max-w-2xl sm:text-xl">
                 Vendio te ayuda a conectar tus cuentas, planificar contenido y descubrir qué publicaciones generan más consultas, interacción y ventas.
