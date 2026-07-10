@@ -1,9 +1,21 @@
+import { MdPostAdd, MdEditNote, MdStickyNote2 } from "react-icons/md";
+import { LuView } from "react-icons/lu";
+
+const kpiIconMap = {
+  MdPostAdd,
+  MdEditNote,
+  MdStickyNote2,
+  LuView,
+};
+
 export default function CalendarKpiCard({ icon, label, value, change, positive }) {
+  const IconComponent = kpiIconMap[icon];
+
   return (
     <article className="rounded-2xl border border-brand-navy/6 bg-white p-4 shadow-sm transition hover:shadow-soft">
       <div className="flex items-start justify-between gap-2">
-        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#f6f7fb] text-base" aria-hidden="true">
-          {icon}
+        <span className="flex h-12 w-12 items-center justify-center rounded-xl text-base text-brand-navy" aria-hidden="true">
+          {IconComponent ? <IconComponent className="text-lg" /> : icon}
         </span>
         {change && (
           <span

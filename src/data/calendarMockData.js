@@ -3,10 +3,10 @@ export const CALENDAR_MONTH = 0; // Enero (0-indexed)
 export const MOCK_TODAY = 6;
 
 export const calendarKpis = [
-  { id: "posts", icon: "📆", label: "Publicaciones este mes", value: "42", change: "+6", positive: true },
-  { id: "drafts", icon: "✏️", label: "Borradores", value: "9", change: "pendientes", positive: null },
-  { id: "notes", icon: "📝", label: "Notas activas", value: "14", change: "en curso", positive: null },
-  { id: "views", icon: "👁️", label: "Visualizaciones totales", value: "884K", change: "+8%", positive: true },
+  { id: "posts", icon: "MdPostAdd", label: "Publicaciones este mes", value: "42", change: "+6", positive: true },
+  { id: "drafts", icon: "MdEditNote", label: "Borradores", value: "9", change: "pendientes", positive: null },
+  { id: "notes", icon: "MdStickyNote2", label: "Notas activas", value: "14", change: "en curso", positive: null },
+  { id: "views", icon: "LuView", label: "Visualizaciones totales", value: "884K", change: "+8%", positive: true },
 ];
 
 export const weekDayLabels = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
