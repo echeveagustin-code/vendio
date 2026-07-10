@@ -265,39 +265,47 @@ function DashboardMockup() {
     {
       id: "accounts",
       label: "Cuentas",
-      title: "Conectá tus redes",
-      text: "Instagram, TikTok y Facebook en un solo lugar para dejar de saltar entre apps.",
+      title: "Conectá tus cuentas",
+      text: "Tené tus perfiles de venta ordenados en un solo lugar para publicar sin saltar entre apps.",
     },
     {
       id: "content",
-      label: "Contenido",
-      title: "Elegí un video",
-      text: "Prepará una pieza para reutilizarla en varias cuentas sin repetir trabajo manual.",
+      label: "Carga",
+      title: "Cargá tus publicaciones",
+      text: "Subí tus videos una vez y Vendio los deja listos para publicarse en las cuentas y fechas que elijas.",
     },
     {
-      id: "calendar",
-      label: "Calendario",
-      title: "Programá la semana",
-      text: "Ordená fechas, cuentas y formatos desde una vista simple.",
+      id: "impact",
+      label: "Impacto",
+      title: "Revisá qué videos rindieron mejor",
+      text: "Detectá qué publicaciones generaron más visualizaciones, clicks e impacto para volver a usarlas en otras cuentas.",
     },
     {
-      id: "results",
-      label: "Resultados",
-      title: "Detectá qué funcionó",
-      text: "Mirá visualizaciones, clicks e impacto para repetir el contenido que mejor rinde.",
+      id: "repeat",
+      label: "Repetir",
+      title: "Repetí lo que funciona",
+      text: "Convertí tus mejores publicaciones en nuevas acciones programadas, sin empezar desde cero cada semana.",
     },
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const activeStep = flowSteps[activeIndex];
 
   useEffect(() => {
+    if (isPaused) return;
+
     const interval = setInterval(() => {
       setActiveIndex((current) => (current + 1) % flowSteps.length);
-    }, 2600);
+    }, 4200);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused, flowSteps.length]);
+
+  const handleStepClick = (index) => {
+    setActiveIndex(index);
+    setIsPaused(true);
+  };
 
   return (
     <div className="dashboard-shell w-full min-w-0 max-w-[330px] rounded-lg border border-white/70 bg-white p-2 shadow-lift sm:mx-auto sm:max-w-[620px]">
@@ -323,10 +331,10 @@ function DashboardMockup() {
                 <button
                   key={step.id}
                   type="button"
-                  onClick={() => setActiveIndex(index)}
-                  className={`rounded-xl px-2 py-2 text-[10px] font-extrabold transition-all duration-300 sm:text-xs ${
+                  onClick={() => handleStepClick(index)}
+                  className={`rounded-xl px-2 py-2 text-[10px] font-extrabold transition-colors duration-300 sm:text-xs ${
                     isActive
-                      ? "bg-brand-navy text-white shadow-soft"
+                      ? "bg-brand-navy text-white"
                       : "bg-white text-brand-ink/45 hover:text-brand-navy"
                   }`}
                 >
@@ -337,10 +345,7 @@ function DashboardMockup() {
           </div>
 
           <div className="overflow-hidden rounded-2xl border border-brand-navy/8 bg-white p-4 shadow-sm">
-            <div
-              key={activeStep.id}
-              className="animate-[heroFlowIn_0.55s_ease_both]"
-            >
+            <div key={activeStep.id} className="animate-[heroSoftFade_0.8s_ease-out_both]">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-brand-accent">
@@ -367,7 +372,7 @@ function DashboardMockup() {
 
           <div className="h-1.5 overflow-hidden rounded-full bg-brand-navy/8">
             <div
-              className="h-full rounded-full bg-brand-navy transition-all duration-500"
+              className="h-full rounded-full bg-brand-navy transition-all duration-1000"
               style={{ width: `${((activeIndex + 1) / flowSteps.length) * 100}%` }}
             />
           </div>
@@ -381,9 +386,8 @@ function HeroMockupBody({ stepId }) {
   if (stepId === "accounts") {
     return (
       <div className="mt-5 grid gap-2">
-        <HeroAccountRow icon={<FaInstagram />} name="Instagram" status="Conectada" />
-        <HeroAccountRow icon={<FaTiktok />} name="TikTok" status="Conectada" />
-        <HeroAccountRow icon={<FaFacebook />} name="Facebook" status="Conectada" />
+        <HeroAccountRow icon={<FaInstagram />} name="@tienda.style" status="Conectada" />
+        <HeroAccountRow icon={<FaInstagram />} name="@outlet.style2" status="Conectada" />
       </div>
     );
   }
@@ -406,57 +410,65 @@ function HeroMockupBody({ stepId }) {
 
           <div className="flex flex-wrap gap-2 pt-2">
             <HeroPill>Reel</HeroPill>
-            <HeroPill>TikTok</HeroPill>
-            <HeroPill>Facebook</HeroPill>
+            <HeroPill>Historia</HeroPill>
+            <HeroPill>Carrusel</HeroPill>
           </div>
         </div>
       </div>
     );
   }
 
-  if (stepId === "calendar") {
+  if (stepId === "impact") {
     return (
-      <div className="mt-5 grid grid-cols-7 gap-2">
-        {["L", "M", "M", "J", "V", "S", "D"].map((day, index) => {
-          const hasPost = index === 1 || index === 3 || index === 5;
-
-          return (
-            <div key={`${day}-${index}`} className="text-center">
-              <p className="text-[10px] font-extrabold text-brand-ink/35">{day}</p>
-
-              <div
-                className={`mt-2 h-16 rounded-xl border border-brand-navy/8 transition-all duration-300 ${
-                  hasPost ? "bg-brand-navy shadow-soft" : "bg-[#f6f7fb]"
-                }`}
-              >
-                {hasPost && (
-                  <div className="mx-auto mt-2 h-2 w-8 rounded-full bg-white/75" />
-                )}
-              </div>
-            </div>
-          );
-        })}
+      <div className="mt-5 space-y-3">
+        <HeroContentImpact
+          title="Reel demo producto"
+          account="@tienda.style"
+          views="48.2K"
+          impact="Alto"
+        />
+        <HeroContentImpact
+          title="Antes y después"
+          account="@outlet.style2"
+          views="31.5K"
+          impact="Bueno"
+        />
+        <HeroContentImpact
+          title="Tutorial rápido"
+          account="@tienda.style"
+          views="19.8K"
+          impact="Medio"
+        />
       </div>
     );
   }
 
   return (
     <div className="mt-5 space-y-4">
-      <div className="grid grid-cols-3 gap-2">
-        <HeroMiniStat label="Views" value="48.2K" />
-        <HeroMiniStat label="Clicks" value="3.1K" />
-        <HeroMiniStat label="Impacto" value="1.8K" />
+      <div className="rounded-2xl border border-brand-navy/8 bg-[#f6f7fb] p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-sm font-extrabold text-brand-ink">Reel demo producto</p>
+            <p className="mt-1 text-xs font-semibold text-brand-ink/50">
+              Listo para reutilizar en otra cuenta
+            </p>
+          </div>
+
+          <span className="rounded-full bg-brand-navy px-3 py-1 text-xs font-extrabold text-white">
+            Repetir
+          </span>
+        </div>
+
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          <HeroMiniStat label="Views" value="48.2K" />
+          <HeroMiniStat label="Clicks" value="3.1K" />
+          <HeroMiniStat label="Impacto" value="1.8K" />
+        </div>
       </div>
 
-      <div className="flex h-28 items-end gap-2 rounded-2xl bg-[#f6f7fb] p-3">
-        {[34, 58, 49, 72, 61, 100, 86].map((height, index) => (
-          <div key={index} className="flex flex-1 items-end">
-            <div
-              className="w-full rounded-t-lg bg-brand-navy/85 transition-all duration-500"
-              style={{ height: `${height}%` }}
-            />
-          </div>
-        ))}
+      <div className="flex items-center justify-between rounded-2xl bg-brand-navy px-4 py-3 text-white">
+        <p className="text-sm font-extrabold">Programado para el viernes</p>
+        <p className="text-xs font-bold text-white/60">2 cuentas</p>
       </div>
     </div>
   );
@@ -477,6 +489,24 @@ function HeroAccountRow({ icon, name, status }) {
   );
 }
 
+function HeroContentImpact({ title, account, views, impact }) {
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-2xl border border-brand-navy/8 bg-[#f6f7fb] px-4 py-3">
+      <div className="min-w-0">
+        <p className="truncate text-sm font-extrabold text-brand-ink">{title}</p>
+        <p className="mt-1 text-xs font-semibold text-brand-ink/50">{account}</p>
+      </div>
+
+      <div className="shrink-0 text-right">
+        <p className="font-display text-sm font-extrabold text-brand-navy">{views}</p>
+        <p className="text-[10px] font-bold uppercase tracking-wide text-brand-ink/40">
+          {impact}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function HeroPill({ children }) {
   return (
     <span className="rounded-full bg-brand-navy/6 px-3 py-1 text-xs font-extrabold text-brand-navy">
@@ -487,7 +517,7 @@ function HeroPill({ children }) {
 
 function HeroMiniStat({ label, value }) {
   return (
-    <div className="rounded-2xl bg-[#f6f7fb] p-3">
+    <div className="rounded-2xl bg-white p-3">
       <p className="font-display text-lg font-extrabold text-brand-navy">{value}</p>
       <p className="mt-1 text-[10px] font-bold uppercase tracking-wide text-brand-ink/40">
         {label}
