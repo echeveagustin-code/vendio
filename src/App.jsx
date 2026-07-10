@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx";
 import AccountsPage from "./pages/AccountsPage.jsx";
 import ContentPage from "./pages/ContentPage.jsx";
+import AnalyticsPage from "./pages/AnalyticsPage.jsx";
 
 const navLinks = [
   { label: "Cómo funciona", href: "#como-funciona" },
@@ -770,6 +771,7 @@ function getViewFromHash() {
   if (hash === "#calendario") return "calendario";
   if (hash === "#cuentas") return "cuentas";
   if (hash === "#contenido") return "contenido";
+  if (hash === "#analiticas") return "analiticas";
   return "landing";
 }
 
@@ -830,6 +832,10 @@ export default function App() {
 
   if (view === "contenido") {
     return <ContentPage />;
+  }
+
+  if (view === "analiticas") {
+    return <AnalyticsPage />;
   }
   const socialLinks = [
     { name: "Instagram", containerClass: "bg-transparent", icon: <FaInstagram size={22} /> },

@@ -3,7 +3,7 @@ export const sidebarMenu = [
   { id: "calendario", label: "Calendario", icon: "📅", href: "#calendario" },
   { id: "contenido", label: "Contenido", icon: "🎬", href: "#contenido" },
   { id: "cuentas", label: "Cuentas conectadas", icon: "🔗", href: "#cuentas" },
-  { id: "analiticas", label: "Analíticas", icon: "📈", href: "#dashboard" },
+  { id: "analiticas", label: "Analíticas", icon: "📈", href: "#analiticas" },
   { id: "configuracion", label: "Configuración", icon: "⚙️", href: "#dashboard" },
 ];
 
