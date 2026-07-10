@@ -23,7 +23,7 @@ export const todaySummary = [
 export const connectedAccounts = [
   { platform: "Instagram", handle: "@tienda.style", status: "Activa", statusTone: "success" },
   { platform: "TikTok", handle: "@tienda.style", status: "Activa", statusTone: "success" },
-  { platform: "Instagram", handle: "@outlet.style2", status: "Pendiente", statusTone: "warning" },
+  { platform: "Instagram", handle: "@tienda.style2", status: "Pendiente", statusTone: "warning" },
 ];
 
 
