@@ -3,6 +3,7 @@ import { FaTiktok, FaInstagram, FaFacebook } from "react-icons/fa";
 import Dashboard from "./pages/Dashboard.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx";
 import AccountsPage from "./pages/AccountsPage.jsx";
+import ContentPage from "./pages/ContentPage.jsx";
 
 const navLinks = [
   { label: "Cómo funciona", href: "#como-funciona" },
@@ -768,6 +769,7 @@ function getViewFromHash() {
   if (hash === "#dashboard") return "dashboard";
   if (hash === "#calendario") return "calendario";
   if (hash === "#cuentas") return "cuentas";
+  if (hash === "#contenido") return "contenido";
   return "landing";
 }
 
@@ -824,6 +826,10 @@ export default function App() {
 
   if (view === "cuentas") {
     return <AccountsPage />;
+  }
+
+  if (view === "contenido") {
+    return <ContentPage />;
   }
   const socialLinks = [
     { name: "Instagram", containerClass: "bg-transparent", icon: <FaInstagram size={22} /> },
