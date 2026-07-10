@@ -1,25 +1,31 @@
-import { MdPostAdd, MdEditNote, MdStickyNote2 } from "react-icons/md";
-import { LuView } from "react-icons/lu";
+import {
+  MdAdsClick,
+  MdChatBubbleOutline,
+  MdShoppingCart,
+  MdTrendingUp,
+  MdVisibility,
+} from "react-icons/md";
 
 const kpiIconMap = {
-  MdPostAdd,
-  MdEditNote,
-  MdStickyNote2,
-  LuView,
+  MdAdsClick,
+  MdChatBubbleOutline,
+  MdShoppingCart,
+  MdTrendingUp,
+  MdVisibility,
 };
 
-export default function CalendarKpiCard({ icon, label, value, change, positive }) {
+export default function AnalyticsKpiCard({ icon, label, value, change, positive }) {
   const IconComponent = kpiIconMap[icon];
 
   return (
     <article className="rounded-2xl border border-brand-navy/6 bg-white p-4 shadow-sm transition hover:shadow-soft">
       <div className="flex items-start justify-between gap-2">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl text-base text-brand-navy" aria-hidden="true">
+        <span className="flex h-10 w-10 items-center justify-center text-brand-navy" aria-hidden="true">
           {IconComponent ? <IconComponent className="text-2xl" /> : icon}
         </span>
         {change && (
           <span
-            className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+            className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${
               positive === true
                 ? "bg-emerald-50 text-emerald-700"
                 : positive === false
@@ -31,8 +37,8 @@ export default function CalendarKpiCard({ icon, label, value, change, positive }
           </span>
         )}
       </div>
-      <p className="mt-3 font-display text-2xl font-extrabold leading-none text-brand-navy">{value}</p>
-      <p className="mt-1.5 text-xs font-semibold text-brand-ink/55 sm:text-sm">{label}</p>
+      <p className="mt-4 font-display text-3xl font-extrabold leading-none text-brand-navy">{value}</p>
+      <p className="mt-2 text-sm font-semibold text-brand-ink/55">{label}</p>
     </article>
   );
 }

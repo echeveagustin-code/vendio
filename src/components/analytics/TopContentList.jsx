@@ -1,8 +1,12 @@
 export default function TopContentList({ items }) {
   return (
     <section className="rounded-2xl border border-brand-navy/6 bg-white p-5 shadow-sm">
-      <h2 className="font-display text-base font-extrabold text-brand-navy">Contenido con más ventas</h2>
-      <p className="mt-0.5 text-sm text-brand-ink/55">Ranking según ventas atribuidas.</p>
+      <h2 className="font-display text-base font-extrabold text-brand-navy">
+        Contenido con más impacto
+      </h2>
+      <p className="mt-0.5 text-sm text-brand-ink/55">
+        Ranking según visualizaciones, clicks e interacción útil.
+      </p>
 
       <ul className="mt-4 space-y-2">
         {items.map((item, index) => (
@@ -24,7 +28,7 @@ export default function TopContentList({ items }) {
             <div className="flex shrink-0 gap-4 text-right">
               <Metric label="Views" value={item.views} />
               <Metric label="Clicks" value={item.clicks} />
-              <Metric label="Ventas" value={item.sales} />
+              <Metric label="Impacto" value={item.interactions} />
             </div>
           </li>
         ))}
