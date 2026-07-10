@@ -14,8 +14,8 @@ export default function CalendarKpiCard({ icon, label, value, change, positive }
   return (
     <article className="rounded-2xl border border-brand-navy/6 bg-white p-4 shadow-sm transition hover:shadow-soft">
       <div className="flex items-start justify-between gap-2">
-        <span className="flex h-22 w-22 items-center justify-center rounded-xl text-base text-brand-navy" aria-hidden="true">
-          {IconComponent ? <IconComponent className="text-lg" /> : icon}
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl text-base text-brand-navy" aria-hidden="true">
+          {IconComponent ? <IconComponent className="text-2xl" /> : icon}
         </span>
         {change && (
           <span
