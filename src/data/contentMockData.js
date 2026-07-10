@@ -1,14 +1,14 @@
 export const contentKpis = [
   { id: "total", icon: "MdCollections", label: "Piezas en tu biblioteca", value: "36", change: "+5", positive: true },
   { id: "sinUsar", icon: "MdFolderOpen", label: "Sin usar todavía", value: "9", change: "listas para programar", positive: null },
-  { id: "mejorScore", icon: "MdStar", label: "Mejor contenido (score)", value: "9.4", change: "Presentación producto", positive: true },
+  { id: "programado", icon: "MdSchedule", label: "Contenido programado", value: "3", change: "próximos 7 días", positive: null },
   { id: "almacenamiento", icon: "MdStorage", label: "Espacio utilizado", value: "2.1 GB", change: "de 10 GB", positive: null },
 ];
 
 export const contentFormats = ["Todos", "Reel", "Post", "Story", "Carrusel"];
 export const contentAccounts = ["Todas las cuentas", "@tienda.style", "@outlet.style2"];
 export const contentStatuses = ["Todos", "Publicado", "Programado", "Sin usar", "Borrador"];
-export const contentSortOptions = ["Más recientes", "Mejor rendimiento", "Más ventas"];
+export const contentSortOptions = ["Más recientes", "Más vistas", "Más ventas"];
 
 export const statusBadgeStyles = {
   Publicado: "bg-emerald-50 text-emerald-700 ring-emerald-200",
@@ -37,7 +37,6 @@ export const initialContentLibrary = [
     uploadedAt: "Hace 2 días",
     status: "Publicado",
     gradient: "from-brand-navy to-[#2F5596]",
-    score: 9.4,
     views: "48.2K",
     clicks: "3.1K",
     queries: "287",
@@ -53,7 +52,6 @@ export const initialContentLibrary = [
     uploadedAt: "Hace 4 días",
     status: "Publicado",
     gradient: "from-[#0f3b8f] to-[#3d6bb3]",
-    score: 8.9,
     views: "62.1K",
     clicks: "2.9K",
     queries: "156",
@@ -69,7 +67,6 @@ export const initialContentLibrary = [
     uploadedAt: "Hace 5 días",
     status: "Publicado",
     gradient: "from-brand-accent to-[#B29A8D]",
-    score: 8.1,
     views: "31.5K",
     clicks: "1.2K",
     queries: "98",
@@ -85,7 +82,6 @@ export const initialContentLibrary = [
     uploadedAt: "Hace 6 días",
     status: "Publicado",
     gradient: "from-[#6B7DB3] to-[#9BA8CC]",
-    score: 7.4,
     views: "19.8K",
     clicks: "789",
     queries: "45",
@@ -101,7 +97,6 @@ export const initialContentLibrary = [
     uploadedAt: "Hace 1 día",
     status: "Programado",
     gradient: "from-[#3d6bb3] to-brand-navy",
-    score: null,
     views: null,
     clicks: null,
     queries: null,
@@ -117,7 +112,6 @@ export const initialContentLibrary = [
     uploadedAt: "Hace 3 horas",
     status: "Sin usar",
     gradient: "from-[#9BA8CC] to-[#6B7DB3]",
-    score: null,
     views: null,
     clicks: null,
     queries: null,
@@ -133,7 +127,6 @@ export const initialContentLibrary = [
     uploadedAt: "Hace 5 horas",
     status: "Sin usar",
     gradient: "from-[#2F5596] to-brand-navy",
-    score: null,
     views: null,
     clicks: null,
     queries: null,
@@ -149,7 +142,6 @@ export const initialContentLibrary = [
     uploadedAt: "Hace 1 hora",
     status: "Borrador",
     gradient: "from-brand-navy to-[#3d6bb3]",
-    score: null,
     views: null,
     clicks: null,
     queries: null,
@@ -168,7 +160,7 @@ export const contentTips = [
     id: "repetir",
     icon: "MdAutoAwesome",
     title: "Repetí lo que funciona",
-    text: "\"Presentación producto\" es tu formato con mejor score. Duplicalo con un producto nuevo.",
+    text: "\"3 errores que frenan tus ventas online\" es tu video con más vistas (62.1K). Duplicalo con un producto nuevo.",
   },
   {
     id: "sinUsar",

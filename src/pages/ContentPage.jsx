@@ -11,6 +11,13 @@ import { contentGradients, contentKpis, initialContentLibrary } from "../data/co
 
 let nextId = 1000;
 
+function parseMetric(value) {
+  if (!value) return 0;
+  const cleaned = value.toString().toUpperCase().replace(",", ".");
+  const multiplier = cleaned.includes("K") ? 1000 : 1;
+  return parseFloat(cleaned) * multiplier || 0;
+}
+
 export default function ContentPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [library, setLibrary] = useState(initialContentLibrary);
@@ -33,7 +40,6 @@ export default function ContentPage() {
       uploadedAt: "Recién subido",
       status: "Sin usar",
       gradient: contentGradients[(library.length + index) % contentGradients.length],
-      score: null,
       views: null,
       clicks: null,
       queries: null,
@@ -50,7 +56,6 @@ export default function ContentPage() {
       title: `${item.title} (copia)`,
       status: "Sin usar",
       uploadedAt: "Recién duplicado",
-      score: null,
       views: null,
       clicks: null,
       queries: null,
@@ -77,8 +82,8 @@ export default function ContentPage() {
       return matchesSearch && matchesFormat && matchesAccount && matchesStatus;
     });
 
-    if (sort === "Mejor rendimiento") {
-      items = [...items].sort((a, b) => (b.score || 0) - (a.score || 0));
+    if (sort === "Más vistas") {
+      items = [...items].sort((a, b) => parseMetric(b.views) - parseMetric(a.views));
     } else if (sort === "Más ventas") {
       items = [...items].sort((a, b) => (parseFloat(b.sales) || 0) - (parseFloat(a.sales) || 0));
     }

@@ -1,4 +1,4 @@
-import { MdContentCopy, MdDeleteOutline, MdImage, MdSchedule, MdStar, MdVideocam } from "react-icons/md";
+import { MdContentCopy, MdDeleteOutline, MdImage, MdSchedule, MdVideocam } from "react-icons/md";
 import { statusBadgeStyles } from "../../data/contentMockData";
 
 export default function ContentLibraryCard({ item, onPreview, onSchedule, onDuplicate, onDelete }) {
@@ -30,12 +30,6 @@ export default function ContentLibraryCard({ item, onPreview, onSchedule, onDupl
             {item.type === "video" ? "▶" : "🔍"}
           </span>
         </div>
-
-        {item.score && (
-          <span className="absolute bottom-3 left-3 flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-[10px] font-extrabold text-brand-navy">
-            <MdStar className="text-amber-500" /> {item.score}
-          </span>
-        )}
       </button>
 
       <div className="p-4">

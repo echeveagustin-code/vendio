@@ -1,9 +1,9 @@
-import { MdCollections, MdFolderOpen, MdStar, MdStorage } from "react-icons/md";
+import { MdCollections, MdFolderOpen, MdSchedule, MdStorage } from "react-icons/md";
 
 const kpiIconMap = {
   MdCollections,
   MdFolderOpen,
-  MdStar,
+  MdSchedule,
   MdStorage,
 };
 

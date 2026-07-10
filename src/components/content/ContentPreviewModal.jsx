@@ -56,7 +56,6 @@ export default function ContentPreviewModal({ item, onClose, onSchedule, onDupli
 
           <p className="mt-1 text-sm font-semibold text-brand-ink/50">
             {item.account} · {item.uploadedAt}
-            {item.score ? ` · Score ${item.score}` : ""}
           </p>
 
           {hasMetrics ? (
