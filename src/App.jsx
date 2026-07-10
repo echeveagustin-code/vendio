@@ -284,7 +284,7 @@ function DashboardMockup() {
       id: "repeat",
       label: "Repetir",
       title: "Repetí lo que funciona",
-      text: "Convertí tus mejores publicaciones en nuevas acciones programadas, sin empezar desde cero cada semana.",
+      text: "Repetí tus mejores publicaciones en varias cuentas, asi genera mas ventas.",
     },
   ];
 
