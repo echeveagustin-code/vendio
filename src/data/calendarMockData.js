@@ -4,10 +4,10 @@ export const MOCK_TODAY = 6;
 
 
 export const calendarKpis = [
-  { id: "posts", icon: "📆", label: "Publicaciones este mes", value: "42", change: "+6", positive: true },
-  { id: "drafts", icon: "✏️", label: "Borradores", value: "9", change: "pendientes", positive: null },
-  { id: "notes", icon: "📝", label: "Notas activas", value: "14", change: "en curso", positive: null },
-  { id: "views", icon: "👁️", label: "Visualizaciones totales", value: "884K", change: "+8%", positive: true },
+  { id: "posts", icon: "MdPostAdd", label: "Publicaciones este mes", value: "42", change: "+6", positive: true },
+  { id: "drafts", icon: "MdEditNote", label: "Borradores", value: "9", change: "pendientes", positive: null },
+  { id: "notes", icon: "MdStickyNote2", label: "Notas activas", value: "14", change: "en curso", positive: null },
+  { id: "views", icon: "LuView", label: "Visualizaciones totales", value: "884K", change: "+8%", positive: true },
 ];
 
 export const weekDayLabels = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
@@ -37,7 +37,7 @@ export const scheduledPosts = [
   { id: 1, day: 3, time: "10:00", title: "Outfit oficina lunes", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Publicado" },
   { id: 2, day: 3, time: "19:30", title: "Tips de styling", type: "TikTok", platform: "TikTok", account: "@tienda.style", status: "Publicado" },
   { id: 3, day: 6, time: "09:00", title: "Look casual finde", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Programado" },
-  { id: 4, day: 6, time: "14:00", title: "Behind the scenes", type: "Story", platform: "Instagram", account: "@outlet.style", status: "Revisión" },
+  { id: 4, day: 6, time: "14:00", title: "Behind the scenes", type: "Story", platform: "Instagram", account: "@tienda.style2", status: "Revisión" },
   { id: 5, day: 8, time: "11:30", title: "Colección verano", type: "Post", platform: "Facebook", account: "Tienda Style", status: "Borrador" },
   { id: 6, day: 10, time: "18:00", title: "Tutorial vestido", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Publicado" },
   { id: 7, day: 10, time: "20:00", title: "Shorts outfit", type: "Shorts", platform: "YouTube", account: "Tienda Style", status: "Programado" },
@@ -45,17 +45,17 @@ export const scheduledPosts = [
   { id: 9, day: 12, time: "12:00", title: "Trend del momento", type: "TikTok", platform: "TikTok", account: "@tienda.style", status: "Borrador" },
   { id: 10, day: 14, time: "09:30", title: "Look de verano en 3 pasos", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Programado" },
   { id: 11, day: 14, time: "12:00", title: "5 outfits trabajo", type: "TikTok", platform: "TikTok", account: "@tienda.style", status: "Borrador" },
-  { id: 12, day: 14, time: "18:45", title: "Oferta flash stories", type: "Story", platform: "Instagram", account: "@outlet.style", status: "Revisión" },
+  { id: 12, day: 14, time: "18:45", title: "Oferta flash stories", type: "Story", platform: "Instagram", account: "@tienda.style2", status: "Revisión" },
   { id: 13, day: 14, time: "20:00", title: "Shorts styling tips", type: "Shorts", platform: "YouTube", account: "Tienda Style", status: "Programado" },
   { id: 14, day: 17, time: "10:30", title: "Reel producto estrella", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Programado" },
-  { id: 15, day: 17, time: "16:00", title: "Carrusel looks", type: "Post", platform: "Instagram", account: "@outlet.style", status: "Borrador" },
+  { id: 15, day: 17, time: "16:00", title: "Carrusel looks", type: "Post", platform: "Instagram", account: "@tienda.style2", status: "Borrador" },
   { id: 16, day: 20, time: "09:30", title: "Lanzamiento colección", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Programado" },
   { id: 17, day: 20, time: "12:00", title: "TikTok challenge", type: "TikTok", platform: "TikTok", account: "@tienda.style", status: "Programado" },
   { id: 18, day: 20, time: "18:00", title: "Live shopping preview", type: "Story", platform: "Instagram", account: "@tienda.style", status: "Revisión" },
   { id: 19, day: 22, time: "11:00", title: "Antes y después", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Publicado" },
   { id: 20, day: 25, time: "15:00", title: "Promo fin de mes", type: "Post", platform: "Facebook", account: "Tienda Style", status: "Borrador" },
   { id: 21, day: 28, time: "10:00", title: "Recap del mes", type: "Reel", platform: "Instagram", account: "@tienda.style", status: "Programado" },
-  { id: 22, day: 31, time: "20:00", title: "Despedida enero", type: "Story", platform: "Instagram", account: "@outlet.style", status: "Programado" },
+  { id: 22, day: 31, time: "20:00", title: "Despedida enero", type: "Story", platform: "Instagram", account: "@tienda.style2", status: "Programado" },
 ];
 
 export const calendarNotes = [

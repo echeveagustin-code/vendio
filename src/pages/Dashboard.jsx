@@ -47,7 +47,7 @@ export default function Dashboard() {
                     <h2 className="font-display text-xl font-extrabold text-brand-navy">Contenido destacado</h2>
                     <p className="mt-1 text-sm text-brand-ink/55">Tus mejores piezas según score, consultas y ventas.</p>
                   </div>
-                  <a href="#dashboard" className="text-sm font-bold text-brand-navy hover:underline">
+                  <a href="#contenido" className="text-sm font-bold text-brand-navy hover:underline">
                     Ver todo el contenido
                   </a>
                 </div>

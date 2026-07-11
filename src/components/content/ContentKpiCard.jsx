@@ -1,20 +1,13 @@
-import {
-  MdAdsClick,
-  MdChatBubbleOutline,
-  MdShoppingCart,
-  MdTrendingUp,
-  MdVisibility,
-} from "react-icons/md";
+import { MdCollections, MdFolderOpen, MdSchedule, MdStorage } from "react-icons/md";
 
 const kpiIconMap = {
-  MdAdsClick,
-  MdChatBubbleOutline,
-  MdShoppingCart,
-  MdTrendingUp,
-  MdVisibility,
+  MdCollections,
+  MdFolderOpen,
+  MdSchedule,
+  MdStorage,
 };
 
-export default function AnalyticsKpiCard({ icon, label, value, change, positive }) {
+export default function ContentKpiCard({ icon, label, value, change, positive }) {
   const IconComponent = kpiIconMap[icon];
 
   return (

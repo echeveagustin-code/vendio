@@ -1,17 +1,15 @@
 import {
-  MdAdsClick,
   MdChatBubbleOutline,
   MdShoppingCart,
   MdTrendingUp,
-  MdVisibility,
 } from "react-icons/md";
+import { LuView } from "react-icons/lu";
 
 const kpiIconMap = {
-  MdAdsClick,
   MdChatBubbleOutline,
   MdShoppingCart,
   MdTrendingUp,
-  MdVisibility,
+  LuView,
 };
 
 export default function AnalyticsKpiCard({ icon, label, value, change, positive }) {
@@ -21,8 +19,9 @@ export default function AnalyticsKpiCard({ icon, label, value, change, positive 
     <article className="rounded-2xl border border-brand-navy/6 bg-white p-4 shadow-sm transition hover:shadow-soft">
       <div className="flex items-start justify-between gap-2">
         <span className="flex h-10 w-10 items-center justify-center text-brand-navy" aria-hidden="true">
-          {IconComponent ? <IconComponent className="text-2xl" /> : icon}
+          {IconComponent ? <IconComponent className="text-2xl" /> : null}
         </span>
+
         {change && (
           <span
             className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${
@@ -37,6 +36,7 @@ export default function AnalyticsKpiCard({ icon, label, value, change, positive 
           </span>
         )}
       </div>
+
       <p className="mt-4 font-display text-3xl font-extrabold leading-none text-brand-navy">{value}</p>
       <p className="mt-2 text-sm font-semibold text-brand-ink/55">{label}</p>
     </article>

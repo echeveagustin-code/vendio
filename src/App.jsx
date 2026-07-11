@@ -3,6 +3,8 @@ import { FaTiktok, FaInstagram, FaFacebook } from "react-icons/fa";
 import Dashboard from "./pages/Dashboard.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx";
 import AccountsPage from "./pages/AccountsPage.jsx";
+import ContentPage from "./pages/ContentPage.jsx";
+import AnalyticsPage from "./pages/AnalyticsPage.jsx";
 
 const navLinks = [
   { label: "Cómo funciona", href: "#como-funciona" },
@@ -259,32 +261,50 @@ function Navbar() {
 }
 
 function DashboardMockup() {
-  const [stats, setStats] = useState({
-    views: Math.floor(Math.random() * (80000 - 2500) + 2500),
-    clics: Math.floor(Math.random() * (5000 - 100) + 100),
-    publicaciones: Math.floor(Math.random() * (500 - 50) + 50),
-    ventas: Math.floor(Math.random() * (200 - 10) + 10),
-  });
+  const flowSteps = [
+    {
+      id: "accounts",
+      label: "Cuentas",
+      title: "Conectá tus cuentas",
+      text: "Tené tus perfiles de venta ordenados en un solo lugar para publicar sin saltar entre apps.",
+    },
+    {
+      id: "content",
+      label: "Carga",
+      title: "Cargá tus publicaciones",
+      text: "Subí tus videos una vez y Vendio los deja listos para publicarse en las cuentas y fechas que elijas.",
+    },
+    {
+      id: "impact",
+      label: "Impacto",
+      title: "Revisá qué videos rindieron mejor",
+      text: "Detectá qué publicaciones generaron más visualizaciones, clicks e impacto para volver a usarlas en otras cuentas.",
+    },
+    {
+      id: "repeat",
+      label: "Repetir",
+      title: "Repetí lo que funciona",
+      text: "Repetí tus mejores publicaciones en varias cuentas, asi genera mas ventas.",
+    },
+  ];
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const activeStep = flowSteps[activeIndex];
 
   useEffect(() => {
+    if (isPaused) return;
+
     const interval = setInterval(() => {
-      setStats((prev) => ({
-        views: prev.views + Math.floor(Math.random() * 10) + 2,
-        clics: prev.clics + Math.floor(Math.random() * 2),
-        publicaciones: prev.publicaciones + (Math.random() * 0.3 + 0.1),
-        ventas: prev.ventas + (Math.random() * 0.3 + 0.1),
-      }));
-    }, 300);
+      setActiveIndex((current) => (current + 1) % flowSteps.length);
+    }, 4200);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused, flowSteps.length]);
 
-  const formatNumber = (num) => {
-    const rounded = Math.round(num * 10) / 10;
-    if (rounded >= 1000) {
-      return (rounded / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-    }
-    return Math.round(rounded).toString();
+  const handleStepClick = (index) => {
+    setActiveIndex(index);
+    setIsPaused(true);
   };
 
   return (
@@ -296,29 +316,212 @@ function DashboardMockup() {
             <span className="h-2.5 w-2.5 rounded-full bg-[#E7D4A8]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#AFD3B5]" />
           </div>
-          <p className="truncate text-[10px] font-bold uppercase tracking-[0.14em] text-white/68 sm:text-xs sm:tracking-[0.18em]">Vendio Analytics</p>
+
+          <p className="truncate text-[10px] font-bold uppercase tracking-[0.14em] text-white/68 sm:text-xs sm:tracking-[0.18em]">
+            Vendio Flow
+          </p>
         </div>
 
         <div className="space-y-4 p-3 sm:p-4">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {[
-              ["Views", formatNumber(stats.views)],
-              ["Clics", formatNumber(stats.clics)],
-              ["Publicaciones", formatNumber(stats.publicaciones)],
-              ["Ventas", formatNumber(stats.ventas)],
-            ].map(([label, value]) => (
-              <div key={label} className="rounded-md border border-brand-navy/8 bg-white px-3 py-3">
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-ink/42">{label}</p>
-                <p className="mt-1 text-xl font-extrabold text-brand-navy transition-all duration-300">{value}</p>
-              </div>
-            ))}
+          <div className="grid grid-cols-4 gap-2">
+            {flowSteps.map((step, index) => {
+              const isActive = activeIndex === index;
+
+              return (
+                <button
+                  key={step.id}
+                  type="button"
+                  onClick={() => handleStepClick(index)}
+                  className={`rounded-xl px-2 py-2 text-[10px] font-extrabold transition-colors duration-300 sm:text-xs ${
+                    isActive
+                      ? "bg-brand-navy text-white"
+                      : "bg-white text-brand-ink/45 hover:text-brand-navy"
+                  }`}
+                >
+                  {step.label}
+                </button>
+              );
+            })}
           </div>
 
-          <div className="relative overflow-hidden">
-            <ContinuousScroller rows={videoRows} />
+          <div className="overflow-hidden rounded-2xl border border-brand-navy/8 bg-white p-4 shadow-sm">
+            <div key={activeStep.id} className="animate-[heroSoftFade_0.8s_ease-out_both]">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-brand-accent">
+                    Paso {activeIndex + 1}
+                  </p>
+
+                  <h3 className="mt-2 font-display text-xl font-extrabold text-brand-navy sm:text-2xl">
+                    {activeStep.title}
+                  </h3>
+
+                  <p className="mt-2 max-w-sm text-sm font-semibold leading-6 text-brand-ink/55">
+                    {activeStep.text}
+                  </p>
+                </div>
+
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-navy text-lg font-extrabold text-white shadow-soft">
+                  {activeIndex + 1}
+                </div>
+              </div>
+
+              <HeroMockupBody stepId={activeStep.id} />
+            </div>
+          </div>
+
+          <div className="h-1.5 overflow-hidden rounded-full bg-brand-navy/8">
+            <div
+              className="h-full rounded-full bg-brand-navy transition-all duration-1000"
+              style={{ width: `${((activeIndex + 1) / flowSteps.length) * 100}%` }}
+            />
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function HeroMockupBody({ stepId }) {
+  if (stepId === "accounts") {
+    return (
+      <div className="mt-5 grid gap-2">
+        <HeroAccountRow icon={<FaInstagram />} name="@tienda.style" status="Conectada" />
+        <HeroAccountRow icon={<FaInstagram />} name="@outlet.style2" status="Conectada" />
+      </div>
+    );
+  }
+
+  if (stepId === "content") {
+    return (
+      <div className="mt-5 grid gap-3 sm:grid-cols-[120px_1fr]">
+        <div className="relative h-36 overflow-hidden rounded-2xl bg-gradient-to-br from-brand-navy via-[#2F5596] to-brand-accent shadow-soft">
+          <div className="absolute left-3 top-3 h-2 w-12 rounded-full bg-white/60" />
+          <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-white/14 p-2 backdrop-blur-sm">
+            <div className="h-2 w-2/3 rounded-full bg-white/70" />
+            <div className="mt-2 h-2 w-1/2 rounded-full bg-white/40" />
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <div className="h-3 w-4/5 rounded-full bg-brand-navy/12" />
+          <div className="h-3 w-3/5 rounded-full bg-brand-navy/10" />
+          <div className="h-3 w-5/6 rounded-full bg-brand-navy/8" />
+
+          <div className="flex flex-wrap gap-2 pt-2">
+            <HeroPill>Reel</HeroPill>
+            <HeroPill>Historia</HeroPill>
+            <HeroPill>Carrusel</HeroPill>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (stepId === "impact") {
+    return (
+      <div className="mt-5 space-y-3">
+        <HeroContentImpact
+          title="Reel demo producto"
+          account="@tienda.style"
+          views="48.2K"
+          impact="Alto"
+        />
+        <HeroContentImpact
+          title="Antes y después"
+          account="@outlet.style2"
+          views="31.5K"
+          impact="Bueno"
+        />
+        <HeroContentImpact
+          title="Tutorial rápido"
+          account="@tienda.style"
+          views="19.8K"
+          impact="Medio"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-5 space-y-4">
+      <div className="rounded-2xl border border-brand-navy/8 bg-[#f6f7fb] p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-sm font-extrabold text-brand-ink">Reel demo producto</p>
+            <p className="mt-1 text-xs font-semibold text-brand-ink/50">
+              Listo para reutilizar en otra cuenta
+            </p>
+          </div>
+
+          <span className="rounded-full bg-brand-navy px-3 py-1 text-xs font-extrabold text-white">
+            Repetir
+          </span>
+        </div>
+
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          <HeroMiniStat label="Views" value="48.2K" />
+          <HeroMiniStat label="Clicks" value="3.1K" />
+          <HeroMiniStat label="Impacto" value="1.8K" />
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between rounded-2xl bg-brand-navy px-4 py-3 text-white">
+        <p className="text-sm font-extrabold">Programado para el viernes</p>
+        <p className="text-xs font-bold text-white/60">2 cuentas</p>
+      </div>
+    </div>
+  );
+}
+
+function HeroAccountRow({ icon, name, status }) {
+  return (
+    <div className="flex items-center justify-between rounded-2xl border border-brand-navy/8 bg-[#f6f7fb] px-4 py-3">
+      <div className="flex items-center gap-3">
+        <span className="text-xl text-brand-navy">{icon}</span>
+        <span className="text-sm font-extrabold text-brand-ink">{name}</span>
+      </div>
+
+      <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-extrabold text-emerald-700">
+        {status}
+      </span>
+    </div>
+  );
+}
+
+function HeroContentImpact({ title, account, views, impact }) {
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-2xl border border-brand-navy/8 bg-[#f6f7fb] px-4 py-3">
+      <div className="min-w-0">
+        <p className="truncate text-sm font-extrabold text-brand-ink">{title}</p>
+        <p className="mt-1 text-xs font-semibold text-brand-ink/50">{account}</p>
+      </div>
+
+      <div className="shrink-0 text-right">
+        <p className="font-display text-sm font-extrabold text-brand-navy">{views}</p>
+        <p className="text-[10px] font-bold uppercase tracking-wide text-brand-ink/40">
+          {impact}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function HeroPill({ children }) {
+  return (
+    <span className="rounded-full bg-brand-navy/6 px-3 py-1 text-xs font-extrabold text-brand-navy">
+      {children}
+    </span>
+  );
+}
+
+function HeroMiniStat({ label, value }) {
+  return (
+    <div className="rounded-2xl bg-white p-3">
+      <p className="font-display text-lg font-extrabold text-brand-navy">{value}</p>
+      <p className="mt-1 text-[10px] font-bold uppercase tracking-wide text-brand-ink/40">
+        {label}
+      </p>
     </div>
   );
 }
@@ -769,6 +972,8 @@ function getViewFromHash() {
   if (hash === "#dashboard") return "dashboard";
   if (hash === "#calendario") return "calendario";
   if (hash === "#cuentas") return "cuentas";
+  if (hash === "#contenido") return "contenido";
+  if (hash === "#analiticas") return "analiticas";
   return "landing";
 }
 
@@ -825,6 +1030,14 @@ export default function App() {
 
   if (view === "cuentas") {
     return <AccountsPage />;
+  }
+
+  if (view === "contenido") {
+    return <ContentPage />;
+  }
+
+  if (view === "analiticas") {
+    return <AnalyticsPage />;
   }
   const socialLinks = [
     { name: "Instagram", containerClass: "bg-transparent", icon: <FaInstagram size={22} /> },
