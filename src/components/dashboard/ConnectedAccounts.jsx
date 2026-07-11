@@ -1,5 +1,5 @@
 import { FaTiktok, FaInstagram, FaFacebook } from "react-icons/fa";
-import { connectedAccounts, statusStyles } from "../../data/dashboardMockData";
+import { connectedAccounts } from "../../data/dashboardMockData";
 
 const PlatformIconMap = {
   Instagram: FaInstagram,
@@ -7,7 +7,54 @@ const PlatformIconMap = {
   Facebook: FaFacebook,
 };
 
-export default function ConnectedAccounts() {
+const statusStyles = {
+  connected: "bg-emerald-50 text-emerald-700",
+  active: "bg-emerald-50 text-emerald-700",
+  ok: "bg-emerald-50 text-emerald-700",
+
+  disconnected: "bg-rose-50 text-rose-700",
+  error: "bg-rose-50 text-rose-700",
+  expired: "bg-rose-50 text-rose-700",
+
+  pending: "bg-amber-50 text-amber-700",
+  warning: "bg-amber-50 text-amber-700",
+};
+
+function getPlatformName(account) {
+  return account.platform || account.provider || account.network || "Cuenta";
+}
+
+function getAccountHandle(account) {
+  return (
+    account.handle ||
+    account.username ||
+    account.account_name ||
+    account.external_username ||
+    account.name ||
+    "Sin usuario"
+  );
+}
+
+function getAccountStatus(account) {
+  return account.status || account.connection_status || "connected";
+}
+
+function getStatusLabel(status) {
+  const labels = {
+    connected: "Conectada",
+    active: "Activa",
+    ok: "OK",
+    disconnected: "Desconectada",
+    error: "Error",
+    expired: "Expirada",
+    pending: "Pendiente",
+    warning: "Revisar",
+  };
+
+  return labels[status] || status;
+}
+
+export default function ConnectedAccounts({ accounts = [] }) {
   return (
     <section className="rounded-2xl border border-brand-navy/6 bg-white p-5 shadow-sm">
       <h2 className="font-display text-base font-extrabold text-brand-navy">

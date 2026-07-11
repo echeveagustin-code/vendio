@@ -1,4 +1,13 @@
-export default function CalendarHeader({ onMenuToggle, viewMode, onViewModeChange, onSchedule, onAddNote }) {
+export default function CalendarHeader({
+  onMenuToggle,
+  viewMode,
+  onViewModeChange,
+  onSchedule,
+  onAddNote,
+  accounts = [],
+  accountFilter,
+  onAccountChange,
+}) {
   return (
     <header className="mb-5">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
@@ -12,10 +21,15 @@ export default function CalendarHeader({ onMenuToggle, viewMode, onViewModeChang
             >
               ☰
             </button>
+
             <div>
-              <h1 className="font-display text-2xl font-extrabold text-brand-navy sm:text-3xl">Calendario</h1>
+              <h1 className="font-display text-2xl font-extrabold text-brand-navy sm:text-3xl">
+                Calendario
+              </h1>
+
               <p className="mt-1 text-sm text-brand-ink/55 sm:text-base">
-                Planificá tus publicaciones, organizá campañas y agregá notas por día.
+                Planificá tus publicaciones, organizá campañas y agregá notas
+                por día.
               </p>
             </div>
           </div>
@@ -24,12 +38,20 @@ export default function CalendarHeader({ onMenuToggle, viewMode, onViewModeChang
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <select
             className="h-10 rounded-xl border border-brand-navy/10 bg-white px-3 text-sm font-semibold text-brand-ink shadow-sm outline-none focus:border-brand-navy focus:ring-2 focus:ring-brand-navy/10"
-            defaultValue="all"
+            value={accountFilter}
+            onChange={(event) => onAccountChange(event.target.value)}
             aria-label="Cuenta"
           >
-            <option value="all">Todas las cuentas</option>
-            <option value="tienda">@tienda.style</option>
-            <option value="outlet">@outlet.style</option>
+            <option value="Todas">Todas las cuentas</option>
+
+            {accounts.map((account) => (
+              <option
+                key={account}
+                value={account}
+              >
+                {account}
+              </option>
+            ))}
           </select>
 
           <div className="flex rounded-xl border border-brand-navy/10 bg-white p-1 shadow-sm">
@@ -39,7 +61,9 @@ export default function CalendarHeader({ onMenuToggle, viewMode, onViewModeChang
                 type="button"
                 onClick={() => onViewModeChange(mode)}
                 className={`rounded-lg px-3 py-1.5 text-xs font-bold transition sm:text-sm ${
-                  viewMode === mode ? "bg-brand-navy text-white" : "text-brand-ink/60 hover:text-brand-navy"
+                  viewMode === mode
+                    ? "bg-brand-navy text-white"
+                    : "text-brand-ink/60 hover:text-brand-navy"
                 }`}
               >
                 {mode}

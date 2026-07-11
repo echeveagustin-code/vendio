@@ -26,7 +26,10 @@ export default function TodaySummary() {
               className="flex items-center justify-between gap-3 rounded-xl bg-[#f6f7fb] px-4 py-3"
             >
               <div className="flex items-center gap-3">
-                <span className="text-base text-brand-navy" aria-hidden="true">
+                <span
+                  className="text-base text-brand-navy"
+                  aria-hidden="true"
+                >
                   {IconComponent ? (
                     <IconComponent className="text-xl" />
                   ) : (

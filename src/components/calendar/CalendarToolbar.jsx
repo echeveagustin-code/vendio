@@ -6,13 +6,15 @@ export default function CalendarToolbar({
   onPrevMonth,
   onNextMonth,
 }) {
-  const platforms = ["Todas", "Instagram", "TikTok", "Facebook", "YouTube"];
+  const platforms = ["Todas", "Instagram", "TikTok", "Facebook"];
 
   return (
     <div className="mb-4">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold uppercase tracking-[0.1em] text-brand-ink/40">Plataforma</span>
+          <span className="text-xs font-bold uppercase tracking-[0.1em] text-brand-ink/40">
+            Plataforma
+          </span>
           {platforms.map((p) => (
             <button
               key={p}
