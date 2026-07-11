@@ -2,6 +2,7 @@ export const CALENDAR_YEAR = 2026;
 export const CALENDAR_MONTH = 0; // Enero (0-indexed)
 export const MOCK_TODAY = 6;
 
+
 export const calendarKpis = [
   { id: "posts", icon: "📆", label: "Publicaciones este mes", value: "42", change: "+6", positive: true },
   { id: "drafts", icon: "✏️", label: "Borradores", value: "9", change: "pendientes", positive: null },

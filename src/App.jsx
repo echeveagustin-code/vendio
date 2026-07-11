@@ -753,11 +753,12 @@ function Field({ label, name, placeholder, type = "text", autoComplete, classNam
 function Footer() {
   return (
     <footer className="bg-[#061631] py-10 text-white">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 lg:px-8 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Wordmark light />
           <p className="mt-2 text-sm font-semibold text-white/58">Vendé más con el contenido que ya publicaste</p>
         </div>
+        <a href="https://x.com/echeve_agus" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white/72 underline-offset-4 hover:text-white hover:underline">Contacto</a>
       </div>
     </footer>
   );
